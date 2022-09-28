@@ -1,0 +1,62 @@
+*{
+    margin:0;
+    padding:0;
+}
+body{
+    box-sizing: border-box;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: repeat(4, auto);
+    grid-template-areas:
+            "cab"
+            "anim"
+            "con"
+            "foot";
+    font-size: 1em;
+}
+header{
+    display: flex;
+    background-color: green;
+    grid-area: "cab";
+}
+#animacion{
+    background-color: rgb(101, 111, 101);
+}
+#animacion img{
+    width: 100%;
+}
+#control{
+    justify-content: space-around;
+    align-items: center;
+    display:flex;
+    background-color: rgb(77, 97, 97);
+    grid-area: "con";
+}
+
+#select{
+    display: flex;
+}
+#paro{
+    display:flex;
+}
+#stop{
+    background-color: red;
+    padding:.7em .5em;
+    border-radius: 50%;
+    font-size:.6em;
+}
+#rearme{
+    background-color: rgb(14, 194, 68);
+    padding:.7em .7em;
+    border-radius: 50%;
+    font-size:.6em;
+}
+#marcha{
+    display: flex;
+}
+footer{
+    display: flex;
+    background-color: greenyellow;
+    grid-area: "foot";
+}
