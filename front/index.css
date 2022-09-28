@@ -1,0 +1,91 @@
+*{
+    margin:0;
+    padding:0;
+}
+dt{
+    border-bottom: 1.2px solid black;
+}
+body{
+    box-sizing: border-box;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 9% 62% 12% 17%;
+    grid-template-areas:
+            "cab cab"
+            "anim anim"
+            "con con"
+            "foot foot";
+    font-size: 1em;
+}
+header{
+    display:flex;
+    background-color:#006f2b;
+    grid-area: cab;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-style: normal;
+}
+
+#animacion{
+    background-color: white;
+}
+#animacion img{
+    width: 100%;
+}
+#control{
+    padding-top: .2em;
+    justify-content: space-around;
+    background-color: rgb(77, 97, 97);
+    grid-area: con;
+    border:1px solid grey;
+}
+#botones{
+    display: flex;
+    justify-content: center;
+    margin-left: 2em;
+}
+#stop{
+    margin-right: 2em;
+}
+#select{
+    padding-left: .5em;
+    display:block;
+}
+#select p{
+    margin-bottom: .2em;
+}
+#paro{
+    display:flex;
+}
+#stop{
+    background-color: red;
+    padding:.7em .5em;
+    border-radius: 50%;
+    font-size:.6em;
+}
+#rearme{
+    background-color: rgb(14, 194, 68);
+    padding:.7em .7em;
+    border-radius: 50%;
+    font-size:.6em;
+}
+#marcha{
+    display: flex;
+}
+footer{
+    display: flex;
+    background-color: #cccccc;
+    grid-area: foot;
+    font-size: .7em;
+    justify-content: space-around;
+}
+footer img{
+    padding: .5em;
+}
+footer dd{
+    padding-bottom: .4em;
+}
+footer dt{
+    margin-bottom: 1em;
+    padding-top: 1em;
+}
