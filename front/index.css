@@ -40,9 +40,16 @@ nav{
 
 #animacion{
     background-color: white;
+    grid-area: anim;
+    margin: auto 0;
 }
 #animacion img{
-    width: 100%;
+    width: 60%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+    
 }
 #control{
     padding-top: .2em;
@@ -129,13 +136,39 @@ footer dt{
 }
 @media screen and (min-width:768px) {
     body{
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 30% 70%;
     grid-template-rows: 9% 62% 12% 17%;
     grid-template-areas: 
     "cab cab"
     "anim anim"
-    "con anim"
+    "con ."
     "foot foot";
     }
+    #botones{
+         padding-left: 5em;
+         padding-top: 0.5em;
+    }
+   #select{
+        padding-top: 1em;
+        padding-left: 1em;
+   } 
 
 }
+
+@media (min-width: 1024px) {
+    body{
+    width: 70%;
+    margin: 0 auto;
+    }
+    #animacion img{
+        width: 50%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;   
+    }
+    #botones{
+        padding-left: 5em;
+        padding-top: 0.5em;
+   }
+}
+
