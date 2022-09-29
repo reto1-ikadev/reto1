@@ -19,6 +19,9 @@ body{
             "foot foot";
     font-size: 1em;
 }
+section{
+    grid-area: anim;
+}
 header{
     display:flex;
     background-color:#006f2b;
@@ -138,4 +141,20 @@ footer dt{
     "foot foot";
     }
 
+}
+@media (min-width: 1024px) {
+    body{
+    width: 70%;
+    margin: 0 auto;
+    }
+    #animacion img{
+        width: 50%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;   
+    }
+    #botones{
+        padding-left: 5em;
+        padding-top: 0.5em;
+   }
 }
