@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Gruppo&display=swap');
 *{
     margin:0;
     padding:0;
@@ -22,8 +23,19 @@ header{
     display:flex;
     background-color:#006f2b;
     grid-area: cab;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    font-style: normal;
+    justify-content: space-between;
+    justify-items: center;
+    
+}
+nav{
+    padding-left: 1em;
+    padding-top: 1.2em;
+}
+
+#titulo{
+    font-family: 'Gruppo', cursive;
+    padding-right: 2em;
+    padding-top: .7em;
 }
 
 #animacion{
@@ -88,4 +100,30 @@ footer dd{
 footer dt{
     margin-bottom: 1em;
     padding-top: 1em;
+}
+@media screen and (max-width : 287px) {
+    #titulo{
+        padding-right: 0em;
+        padding-top: 0em;
+    }
+}
+@media screen and (max-width: 259px){
+    body{
+        grid-template-rows: 15% 50% 12% 17%;
+    }
+    #titulo{
+        text-align: right;
+        padding-bottom: 1em;
+        padding-right: 1em;
+    }
+    header{
+        flex-flow: column wrap;
+    }
+}
+@media screen and (max-width: 320px){
+    #enlaces{
+     border: 2px solid black;
+     display: none !important;
+        
+    }
 }
