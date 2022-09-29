@@ -127,3 +127,13 @@ footer dt{
         
     }
 }
+@media screen and (min-width:768px) {
+    body{
+    grid-template-columns: 50% 50%;
+    grid-template-areas: 
+    "cab cab"
+    "anim anim"
+    "con anim"
+    "foot foot";
+    }
+}
