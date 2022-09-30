@@ -8,15 +8,15 @@ dt{
 }
 body{
     box-sizing: border-box;
-    min-height: 100vh;
+    max-height: 120vh;
     display: grid;
-    grid-template-columns: 50% 50%;
-    grid-template-rows: 9% 62% 12% 17%;
+    grid-template-columns: 100%;
+    grid-template-rows: 9% 40% 12% 17%;
     grid-template-areas:
-            "cab cab"
-            "anim anim"
-            "con con"
-            "foot foot";
+            "cab"
+            "anim"
+            "con"
+            "foot";
     font-size: 1em;
 }
 section{
@@ -47,13 +47,11 @@ nav p{
 
 #animacion{
     background-color: white;
-}
-#tran{
-    width: 25%;
+    
 }
 
 #control{
-    padding-top: .2em;
+    
     justify-content: space-around;
     background-color: rgba(77, 97, 97,.5);
     grid-area: con;
@@ -140,13 +138,13 @@ footer dt{
 }
 @media screen and (min-width:768px) {
     body{
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 100%;
     grid-template-rows: 9% 62% 12% 17%;
     grid-template-areas: 
-    "cab cab"
-    "anim anim"
-    "con anim"
-    "foot foot";
+    "cab"
+    "anim"
+    "con"
+    "foot";
     }
 
 }
@@ -155,28 +153,47 @@ footer dt{
     width: 70%;
     margin: 0 auto;
     }
-    #animacion img{
-        width: 50%;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;   
-    }
+   
     #botones{
         padding-left: 5em;
-        padding-top: 0.5em;
+        
    }
 }
-#tran{
-    animation-duration: 10s;
-    animation-name: viaje;
+#tranvia{
+    width: 62px;
+    height: 66px;
 }
-@keyframes viaje{
+#tran{
+    animation-name: tramo1;
+    overflow: hidden;
+    margin-left: 6%;
+    animation-duration: 18s;
+    animation-direction: alternate-reverse;
+    animation-delay: 2, 2,2,2,2;
+    animation-iteration-count:infinite;
+    animation-timing-function: ease;
+    animation-play-state: paused;
+}
+
+@keyframes tramo1{
     from{
         margin-right: 100%;
-        width: 300%;
+        width: 100%;
+    }
+    23%{
+        margin-left:23%;
+    }
+    39%{
+        margin-left: 39%;
+    }
+    56%{
+        margin-left: 56%;
+    }
+    73%{
+        margin-left: 73%;
     }
     to{
-        margin-left: 12%;
-        width:100%
+        margin-left: 90%;
     }
 }
+

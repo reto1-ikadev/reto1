@@ -20,3 +20,26 @@ function ocultar(event){
         cuadro.style.display= cuadro.value = "block";
     }
 }
+/*Boton parar para parar la animación*/
+var bStop;
+var imgTranvia;
+bStop = document.getElementById("stop");
+bStop.addEventListener("click", parar);
+console.log(bStop);
+function parar(){
+ console.log("paro el tranvia");
+    imgTranvia = document.getElementById("tran");
+    imgTranvia.style.animationPlayState = "paused" ;
+    console.log(imgTranvia);
+}
+/*Boton para arrancar la animacion*/
+ var bGo;
+ bGo = document.getElementById("rearme");
+ bGo.addEventListener("click",arrancar);
+ 
+ function arrancar(){
+    console.log("arranco la animacion");
+    imgTranvia = document.getElementById("tran");
+    imgTranvia.style.animationPlayState = "running" ;
+    console.log(imgTranvia);
+ }
