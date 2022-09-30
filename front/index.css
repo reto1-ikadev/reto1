@@ -28,11 +28,15 @@ header{
     grid-area: cab;
     justify-content: space-between;
     justify-items: center;
-    
 }
+
 nav{
     padding-left: 1em;
     padding-top: 1.2em;
+    font-size: .6em;
+}
+nav p{
+    padding-bottom:.3em ;
 }
 
 #titulo{
@@ -44,15 +48,19 @@ nav{
 #animacion{
     background-color: white;
 }
-#animacion img{
-    width: 100%;
+#tran{
+    width: 25%;
 }
+
 #control{
     padding-top: .2em;
     justify-content: space-around;
-    background-color: rgb(77, 97, 97);
+    background-color: rgba(77, 97, 97,.5);
     grid-area: con;
     border:1px solid grey;
+    margin-left: .2em;
+    margin-right: .2em;
+    margin-bottom: .2em;
 }
 #botones{
     display: flex;
@@ -112,7 +120,7 @@ footer dt{
 }
 @media screen and (max-width: 259px){
     body{
-        grid-template-rows: 15% 50% 12% 17%;
+        grid-template-rows: 8% 50% 12% 17%;
     }
     #titulo{
         text-align: right;
@@ -157,4 +165,18 @@ footer dt{
         padding-left: 5em;
         padding-top: 0.5em;
    }
+}
+#tran{
+    animation-duration: 10s;
+    animation-name: viaje;
+}
+@keyframes viaje{
+    from{
+        margin-right: 100%;
+        width: 300%;
+    }
+    to{
+        margin-left: 12%;
+        width:100%
+    }
 }

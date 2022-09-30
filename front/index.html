@@ -13,7 +13,9 @@
         </head>
         <header>
             <nav>
-                <select name="menu" size="1">
+                <p>Modo:</p>
+                <select id="modo" name="menu" size="1">
+                    <option>Seleccione</option>
                     <option value ="manual">Manual</option>
                     <option value="automatico">Autom&aacute;tico</option>
                </select>
@@ -25,7 +27,10 @@
             
         </header>
         <section id="animacion">
-            <svg width="100%" height="auto" viewBox = "0 0 120 120">
+            <div id="tran">
+                <img id="tranvia" src="imagenes/tranvia3.png">
+            </div>
+            <svg width="100%" viewBox = "0 0 120 120">
                 <line x1="10" y1="10" x2="92%" y2="10" stroke-width=".7" style= "stroke: black"/>
                 <circle cx="10" cy="10" r="2" stroke-width="4" fill="grey"/>
                 <circle cx="30" cy="10" r="2" stroke-width="4" fill="grey"/>
@@ -83,4 +88,5 @@
             
         </footer>
     </body>
+   <script src = "js/main.js"></script>
 </html>
