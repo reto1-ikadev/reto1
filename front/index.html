@@ -24,13 +24,19 @@
                 <h1>euskotren</h1>
                 <h6>Intranet de euskotren</h6>
             </div>
-            
         </header>
+
         <section id="animacion">
-            <div id="tran">
-                <img id="tranvia" src="imagenes/tranvia3.png">
+            <div id="anim_tranvia1">
+                <img id="tren1" src="imagenes/tranvia3.png">
             </div>
-            <svg width="100%" viewBox = "0 0 120 120">
+           <!-- /* <div id="anim_tranvia2">
+                <img id="tren2" src="imagenes/tranvia3.png"> 
+            </div>
+            <div id="anim_tranvia3">
+                <img id="tren3" src="imagenes/tranvia3.png">
+            </div> -->
+                <svg width="100%" viewBox = "0 0 120 120">
                 <line x1="10" y1="10" x2="92%" y2="10" stroke-width=".7" style= "stroke: black"/>
                 <circle cx="10" cy="10" r="2" stroke-width="4" fill="grey"/>
                 <circle cx="30" cy="10" r="2" stroke-width="4" fill="grey"/>
@@ -43,14 +49,25 @@
         </section>
         <section id="control">
             <div id="select">
-                <p>Parada</p> 
-                <select name = "parada" size = "1">
-                    <option value = "Abetxuko">Abetxuco</option>
-                    <option value = "Kristo">Kristo</option>
-                    <option value = "Kaabenta">Kaabenta</option>
-                    <option value = "Artapadora">Artapadora</option>
-                    <option value = "Arriaga">Arriaga</option>
-                    <option value = "General">General Alava</option>
+                <p>Parada destino</p> 
+                <!-- <select name = "parada origen" id="origen" size = "1">
+                    <option>Seleccione</option>
+                    <option value = "1">Abetxuco</option>
+                    <option value = "2">Kristo</option>
+                    <option value = "3">Kaabenta</option>
+                    <option value = "4">Artapadora</option>
+                    <option value = "5">Arriaga</option>
+                    <option value = "6">General Alava</option>
+                </select> -->
+                
+                <select name = "parada destino" id="destino" size = "1">
+                    <option>Seleccione</option>
+                    <option value = "1">Abetxuco</option>
+                    <option value = "2">Kristo</option>
+                    <option value = "3">Kaabenta</option>
+                    <option value = "4">Artapadora</option>
+                    <option value = "5">Arriaga</option>
+                    <option value = "6">General Alava</option>
                 </select>
             </div>
                 <div id ="botones">

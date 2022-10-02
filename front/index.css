@@ -1,4 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Gruppo&display=swap');
+:root{
+    --posdestino:0%;
+    --posorigen  :5%;
+}
 *{
     margin:0;
     padding:0;
@@ -159,41 +163,31 @@ footer dt{
         
    }
 }
-#tranvia{
+#tren1{
     width: 62px;
     height: 66px;
 }
-#tran{
-    animation-name: tramo1;
+#anim_tranvia1{
+    animation-name: anim_tranvia;
     overflow: hidden;
-    margin-left: 6%;
-    animation-duration: 18s;
-    animation-direction: alternate-reverse;
-    animation-delay: 2, 2,2,2,2;
-    animation-iteration-count:infinite;
-    animation-timing-function: ease;
+    margin-left: var(--posorigen);
+    animation-duration: 1s;
+    animation-direction: normal;
+    animation-delay: 0.2s;
+    animation-iteration-count:1;
+    animation-timing-function: ease-in-out;
     animation-play-state: paused;
 }
 
-@keyframes tramo1{
+@keyframes anim_tranvia{
     from{
-        margin-right: 100%;
+        margin-left: var(--posorigen);
         width: 100%;
     }
-    23%{
-        margin-left:23%;
-    }
-    39%{
-        margin-left: 39%;
-    }
-    56%{
-        margin-left: 56%;
-    }
-    73%{
-        margin-left: 73%;
-    }
     to{
-        margin-left: 90%;
+        margin-left: var(--posdestino);
     }
 }
+
+
 
