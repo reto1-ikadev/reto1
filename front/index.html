@@ -48,17 +48,10 @@
             
         </section>
         <section id="control">
+            <p>Parada destino</p> 
             <div id="select">
-                <p>Parada destino</p> 
-                <!-- <select name = "parada origen" id="origen" size = "1">
-                    <option>Seleccione</option>
-                    <option value = "1">Abetxuco</option>
-                    <option value = "2">Kristo</option>
-                    <option value = "3">Kaabenta</option>
-                    <option value = "4">Artapadora</option>
-                    <option value = "5">Arriaga</option>
-                    <option value = "6">General Alava</option>
-                </select> -->
+                
+                <input type="text" name="origen" id="origen">
                 
                 <select name = "parada destino" id="destino" size = "1">
                     <option>Seleccione</option>
@@ -69,13 +62,17 @@
                     <option value = "5">Arriaga</option>
                     <option value = "6">General Alava</option>
                 </select>
+
+                <div id="marcha">
+                    <input type="button" id="rearme" value ="Mover">
+                 </div>
             </div>
                 <div id ="botones">
                     <div id="paro">
-                        <input type="button" id="stop" value="Stop">
+                        <input type="button" id="stop" value="Off" onclick="recibirDatos()">
                     </div>
-                    <div id="marcha">
-                        <input type="button" id="rearme" value ="Go">
+                    <div id="marchaMaquina">
+                        <input type="button" id="arrancar" value ="On">
                      </div>
                 </div>  
         </section>

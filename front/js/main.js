@@ -9,6 +9,29 @@ var pos_origen ;
 var pos_destino ;
 const imgTranvia = document.getElementById("anim_tranvia1");
 
+
+
+class Prueba{
+    constructor(jsonrpc, id, result){
+        this.jsonrpc = jsonrpc;
+        this.id = jsonrpc;
+        this.result = result
+    }
+}
+
+
+var arrayVariables = new Array();
+arrayVariables.push(new Prueba("2.0", 1, 1));
+arrayVariables.push(new Prueba("2.0", 2, 1));
+arrayVariables.push(new Prueba("2.0", 3, 2));
+arrayVariables.push(new Prueba("2.0", 4, 4));
+
+console.log(arrayVariables.length)
+
+
+
+
+//recibirDatos(); //Recibir los Datos nada mas abrir la pagina.
 /*Boton para arrancar la animacion*/
 var bGo;
 bGo = document.getElementById("rearme");
@@ -20,9 +43,7 @@ bStop = document.getElementById("stop");
 bStop.addEventListener("click", parar);
 
 /*ComboBox paradas. Actualizar variables de las paradas*/
-var pos_inicio;
-var pos_final;
-var selector_origen = document.getElementById("origen");
+pos_origen = estadoParadaActual();
 var selector_destino = document.getElementById("destino");
 // selector_origen.addEventListener("change", actualizarPosOrigen);
 selector_destino.addEventListener("change", actualizarPosDestino);
@@ -30,6 +51,7 @@ imgTranvia.addEventListener("animationend", listener,false);
 //imgTranvia.className = "animacion";
 imgTranvia.id =  "anim_tranvia1";
 
+actualizarPosOrigen();
 
 function ocultar(event){
     modo = " ";
@@ -80,10 +102,9 @@ function actualizarPosOrigen(){
     console.log("f(x) actualizar variables");
     /*Obtengo la parada de origen y la del destino para asegurar que no han seleccionado la misma en 
     origen y en destino*/
-    pos_origen = selector_origen.options[selector_origen.selectedIndex].value;
     /*Cambio las variables en el css para que la animacion se mueva de una parada a otra */
-    document.querySelector(':root').style.setProperty("--posorigen",array_pos_paradas[pos_origen-1]);
-    console.log("array"+array_pos_paradas[pos_origen-1]);
+    document.querySelector(':root').style.setProperty("--posorigen",array_pos_paradas[pos_origen]);
+    console.log("array"+array_pos_paradas[pos_origen]);
 }
 
 
@@ -101,5 +122,41 @@ function reiniciarAnimacion(){
     imgTranvia.style.animation = null;
 }
 
+var datosRecibidos;
+function recibirDatos(){
+    fetch("peticiones.txt")
+        .then((response) => {
+            if(response.ok){
+                return response.text();}
+
+            throw Error("Error en la peticion.");
+        })
+        .then((data) => {
+            datosRecibidos = data;
+            //convertirJSON(datosRecibidos);
+        }) 
+} 
 
 
+function convertirJSON(datosRecibidos){
+    arrayVariables = JSON.parse(datosRecibidos);
+
+    
+}
+
+function estadoMarchaParo(){
+    //let estadoMarPar = arrayVariables[0].result;
+
+}
+function estadoDireccion(){
+    //let estadoDir = arrayVariables[1].result;
+
+}
+function estadoVelocidad(){
+    //let estadoVel = arrayVariables[2].result;
+
+}
+function estadoParadaActual(){
+    let estadoParAct = arrayVariables[3].result;
+    return estadoParAct;
+}

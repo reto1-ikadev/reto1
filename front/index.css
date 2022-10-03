@@ -14,13 +14,13 @@ body{
     box-sizing: border-box;
     max-height: 120vh;
     display: grid;
-    grid-template-columns: 100%;
+    grid-template-columns: 50% 50%;
     grid-template-rows: 9% 40% 12% 17%;
     grid-template-areas:
-            "cab"
-            "anim"
-            "con"
-            "foot";
+            "cab cab"
+            "anim anim"
+            "con con"
+            "foot foot";
     font-size: 1em;
 }
 section{
@@ -74,10 +74,15 @@ nav p{
 }
 #select{
     padding-left: .5em;
-    display:block;
+    display: flex;
+    align-items: center;
+    justify-content: baseline;
+
 }
-#select p{
+#control p{
     margin-bottom: .2em;
+    margin-left: 0.3em;
+    margin-top: 0.3em;
 }
 #paro{
     display:flex;
@@ -86,13 +91,20 @@ nav p{
     background-color: red;
     padding:.7em .5em;
     border-radius: 50%;
-    font-size:.6em;
+    font-size:.8em;
 }
 #rearme{
-    background-color: rgb(14, 194, 68);
-    padding:.7em .7em;
-    border-radius: 50%;
-    font-size:.6em;
+    background-color: rgb(218, 234, 44);
+    padding:0.2em 1em;
+    margin-left: 0.4em;
+    font-size:0.8em;
+}
+
+#arrancar{
+        background-color: rgb(14, 194, 68);
+        padding:.7em .7em;
+        border-radius: 50%;
+        font-size:.8em;
 }
 #marcha{
     display: flex;
@@ -142,13 +154,13 @@ footer dt{
 }
 @media screen and (min-width:768px) {
     body{
-    grid-template-columns: 100%;
+    grid-template-columns: 50% 50%;
     grid-template-rows: 9% 62% 12% 17%;
     grid-template-areas: 
-    "cab"
-    "anim"
-    "con"
-    "foot";
+    "cab cab"
+    "anim anim"
+    "con . "
+    "foot foot";
     }
 
 }
