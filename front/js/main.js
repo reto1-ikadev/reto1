@@ -8,6 +8,7 @@ arrayModos.addEventListener("change", ocultar);
 var pos_origen ;
 var pos_destino ;
 const imgTranvia = document.getElementById("anim_tranvia1");
+var botones = document.querySelectorAll(".boton");
 
 /*Boton para arrancar la animacion*/
 var bGo;
@@ -50,6 +51,11 @@ function ocultar(event){
 function parar(){
     console.log("paro el tranvia");
     imgTranvia.style.animationPlayState = "paused" ;
+    if(typeof pos_destino !== 'undefined') {
+        if(pos_destino !== "0") {
+            botones[pos_destino - 1].style.fill = "red";
+        }
+    }
 }
 
 
@@ -58,7 +64,13 @@ function parar(){
     /*accedo al elemento css donde están las variables y cambio el valor 
     de la variable posorigen por una de las posiciones guardadas en el array_pos_paradas */
     imgTranvia.style.animationPlayState = "running" ;
-    console.log(imgTranvia.style.animationPlayState);
+    todosEnVacio();
+    if(typeof pos_destino !== 'undefined') {
+        if(pos_destino !== "0") {
+            botones[pos_destino - 1].style.fill = "#FFD700";
+            console.log(imgTranvia.style.animationPlayState);
+        }
+    }
  }
 
  
@@ -68,7 +80,12 @@ function listener(event){
             console.log("animacion finalizada");
             document.querySelector(':root').style.setProperty("--posorigen",array_pos_paradas[pos_destino-1]);
             reiniciarAnimacion();
-            break;
+            if(typeof pos_destino !== 'undefined') {
+                if(pos_destino !== "0") {
+                    botones[pos_destino - 1].style.fill = "green";
+                }
+                break;
+            }
     }
     /*Para que la animacion no vuelva a la posicion de origen, necesito decirle que 
     la variable origen tiene ahora el valor de la variable destino, y la de destino, tendra 
@@ -80,7 +97,7 @@ function actualizarPosOrigen(){
     console.log("f(x) actualizar variables");
     /*Obtengo la parada de origen y la del destino para asegurar que no han seleccionado la misma en 
     origen y en destino*/
-    pos_origen = selector_origen.options[selector_origen.selectedIndex].value;
+    //pos_origen = selector_origen.options[selector_origen.selectedIndex].value;
     /*Cambio las variables en el css para que la animacion se mueva de una parada a otra */
     document.querySelector(':root').style.setProperty("--posorigen",array_pos_paradas[pos_origen-1]);
     console.log("array"+array_pos_paradas[pos_origen-1]);
@@ -101,5 +118,9 @@ function reiniciarAnimacion(){
     imgTranvia.style.animation = null;
 }
 
-
+function todosEnVacio() {
+    for(let boton of botones) {
+        boton.style.fill = "#20B2AA";
+    }
+}
 
