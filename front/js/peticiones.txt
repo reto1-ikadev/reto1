@@ -1,4 +1,0 @@
-:="app".estado_marcha/paro
-:="app".estado_direccion
-:="app".estado_velocidad
-:="app".estado_parada_actual

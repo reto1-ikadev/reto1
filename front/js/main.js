@@ -123,40 +123,33 @@ function reiniciarAnimacion(){
 }
 
 var datosRecibidos;
-function recibirDatos(){
-    fetch("peticiones.txt")
-        .then((response) => {
-            if(response.ok){
-                return response.text();}
-
-            throw Error("Error en la peticion.");
-        })
-        .then((data) => {
-            datosRecibidos = data;
-            //convertirJSON(datosRecibidos);
-        }) 
+async function recibirDatos(){
+    datosRecibidos = await fetch("datos.html").then((response) => response.json()).then((datos)=> {return datos } );
+    pos_origen = estadoParadaActual();
+    actualizarPosOrigen();
 } 
 
 
-function convertirJSON(datosRecibidos){
-    arrayVariables = JSON.parse(datosRecibidos);
-
-    
-}
-
 function estadoMarchaParo(){
-    //let estadoMarPar = arrayVariables[0].result;
+    let estadoMarPar = datosRecibidos['marcha'];
+    return estadoMarPar;
 
 }
 function estadoDireccion(){
-    //let estadoDir = arrayVariables[1].result;
+    let estadoDir = datosRecibidos['direccion'];
+    return estadoDir;
 
 }
 function estadoVelocidad(){
-    //let estadoVel = arrayVariables[2].result;
+    let estadoVel = datosRecibidos['velocidad'];
+    return estadoVel;
 
 }
 function estadoParadaActual(){
-    let estadoParAct = arrayVariables[3].result;
+    let estadoParAct = datosRecibidos['parada'];
+    return estadoParAct;
+}
+function estadoMovimiento(){
+    let estadoParAct = datosRecibidos['movimiento'];
     return estadoParAct;
 }
