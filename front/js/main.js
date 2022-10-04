@@ -1,142 +1,188 @@
-var lugar = 1;// Esta variable es para hacer pruebas mas sin embargo se necesita
-//mediante siemens obtener los valores por las variables
-var aDondeVa = 6; // Lo mismo aplica esto a la anterior variable
+"use strict"
+var arrayModos = new Array();
+var array_pos_paradas = ["5%","21.8%","38.6%","55.4%","72.2%","89%"];
+var modo;
+var cuadro
+arrayModos = document.getElementById("modo");
+arrayModos.addEventListener("change", ocultar);
+var pos_origen ;
+var pos_destino = 1;
+const imgTranvia = document.getElementById("anim_tranvia1");
+var botones = document.querySelectorAll(".boton");
 
-const arrayLuces = document.querySelectorAll(".parada");
-var cbModo = document.getElementById("cbModo");
-var cbParadas = document.getElementById("cbParadas");
+/*Boton para arrancar la animacion*/
+var bGo;
+bGo = document.getElementById("rearme");
+bGo.addEventListener("click",arrancar);
 
-function todasEnRojo() {
-    for(let luz of arrayLuces) {
-        luz.style.fill = "red";
+/*Boton parar para parar la animación*/
+var bStop;
+bStop = document.getElementById("stop");
+bStop.addEventListener("click", parar);
+
+/*ComboBox paradas. Actualizar variables de las paradas*/
+var pos_inicio;
+var pos_final;
+var selector_origen = document.getElementById("origen");
+var selector_destino = document.getElementById("destino");
+// selector_origen.addEventListener("change", actualizarPosOrigen);
+selector_destino.addEventListener("change", actualizarPosDestino);
+imgTranvia.addEventListener("animationend", listener,false);
+//imgTranvia.className = "animacion";
+imgTranvia.id =  "anim_tranvia1";
+
+var posicionAutomatico = 0;
+var posicionAutomaticoReversa = 6;
+
+function ocultar(event){
+    modo = " ";
+    modo = event.target.value;
+    console.log("modo " + modo);
+    if(modo != "manual"){
+        cuadro = document.getElementById("control");
+        console.log(cuadro + " cuadro");
+        cuadro.style.display = "none";
+        // No se para que es necesario esta linea de esta forma: 
+        // cuadro.style.display = cuadro.value = "none";
+        // Pero no hay ninguna diferencia entre las dos.
+        console.log("desaparezco");
+        automatico();
+    }
+    else{
+        console.log("aparezco");
+        //cuadro.style.display= cuadro.value = "block";
+        cuadro.style.display = "block";
     }
 }
 
-function automaticoModo() {
-    todasEnRojo();
-
-switch(lugar) {
-    case 1: {
-        arrayLuces[0].style.fill = "green";
-        break;
-    }
-    case 2: {
-        arrayLuces[1].style.fill = "green";
-        break;
-    }
-    case 3: {
-        arrayLuces[2].style.fill = "green";
-        break;
-    }
-    case 4: {
-        arrayLuces[3].style.fill = "green";
-        break;
-    }
-    case 5: {
-        arrayLuces[4].style.fill = "green";
-        break;
-    }
-    case 6: {
-        arrayLuces[5].style.fill = "green";
-        break;
-    }
-    default: {
-        alert("Algo salio mal xd");
+function parar(){
+    console.log("paro el tranvia");
+    imgTranvia.style.animationPlayState = "paused" ;
+    if(typeof pos_destino !== 'undefined') {
+        if(pos_destino !== "0") {
+            botones[pos_destino - 1].style.fill = "red";
+        }
     }
 }
 
-switch(aDondeVa) {
-    case 1: {
-        arrayLuces[0].style.fill = "yellow";
-        break;
-    }
-    case 2: {
-        arrayLuces[1].style.fill = "yellow";
-        break;
-    }
-    case 3: {
-        arrayLuces[2].style.fill = "yellow";
-        break;
-    }
-    case 4: {
-        arrayLuces[3].style.fill = "yellow";
-        break;
-    }
-    case 5: {
-        arrayLuces[4].style.fill = "yellow";
-        break;
-    }
-    case 6: {
-        arrayLuces[5].style.fill = "yellow";
-        break;
-    }
-    default: {
-        alert("Algo salio mal xd");
-    }
-}
-}
 
-var lugarManual = cbParadas.selectedIndex;
+ function arrancar(){
+    console.log("arranco la animacion");
+    /*accedo al elemento css donde están las variables y cambio el valor 
+    de la variable posorigen por una de las posiciones guardadas en el array_pos_paradas */
+    imgTranvia.style.animationPlayState = "running" ;
+    todosEnVacio();
+    if(typeof pos_destino !== 'undefined') {
+        if(pos_destino !== "0") {
+            botones[pos_destino - 1].style.fill = "#FFD700";
+            console.log(imgTranvia.style.animationPlayState);
+        }
+    }
+ }
 
-function desplazar() {
-    lugarManual = lugarManual + 1;
+ 
+function listener(event){
+    switch(event.type){
+        case "animationend":
+            console.log("animacion finalizada");
+            document.querySelector(':root').style.setProperty("--posorigen",array_pos_paradas[pos_destino-1]);
+            reiniciarAnimacion();
+            if(typeof pos_destino !== 'undefined') {
+                if(pos_destino !== "0") {
+                    botones[pos_destino - 1].style.fill = "green";
+                }
+                break;
+            }
+    }
+    /*Para que la animacion no vuelva a la posicion de origen, necesito decirle que 
+    la variable origen tiene ahora el valor de la variable destino, y la de destino, tendra 
+    el nuevo valor que se seleccione en el combo*/
 }
 
-function manualModo() {
-    //alert("Entro");
-    todasEnRojo();
 
-    switch(lugarManual) {
-        case 0: {
-            arrayLuces[0].style.fill = "green";
-            break;
-        }
-        case 1: {
-            arrayLuces[1].style.fill = "green";
-            break;
-        }
-        case 2: {
-            arrayLuces[2].style.fill = "green";
-            break;
-        }
-        case 3: {
-            arrayLuces[3].style.fill = "green";
-            break;
-        }
-        case 4: {
-            arrayLuces[4].style.fill = "green";
-            break;
-        }
-        case 5: {
-            arrayLuces[5].style.fill = "green";
-            break;
-        }
-        default: {
-            alert("Algo salio mal xd");
-        }
-    }
-    if(lugar !== lugarManual) {
-        desplazar();
+function actualizarPosOrigen(){
+    console.log("f(x) actualizar variables");
+    /*Obtengo la parada de origen y la del destino para asegurar que no han seleccionado la misma en 
+    origen y en destino*/
+    //pos_origen = selector_origen.options[selector_origen.selectedIndex].value;
+    /*Cambio las variables en el css para que la animacion se mueva de una parada a otra */
+    document.querySelector(':root').style.setProperty("--posorigen",array_pos_paradas[pos_origen-1]);
+    console.log("array"+array_pos_paradas[pos_origen-1]);
+}
+
+
+function actualizarPosDestino(){
+    pos_destino = selector_destino.options[selector_destino.selectedIndex].value;
+    document.querySelector(':root').style.setProperty("--posdestino",array_pos_paradas[pos_destino-1]);
+    console.log(array_pos_paradas[pos_destino-1]);
+}
+
+function reiniciarAnimacion(){
+    /*Esta funcion la he tenido que crear para que el tranvia se vuelva a mover cada vez que pulso go. 
+    Sin esto, la animación se para en una parada y no vuelve a arrancar. Solo ejecuta un ciclo*/
+    imgTranvia.style.animation = "none";
+    imgTranvia.offsetHeight; /*Con esto consigo actualizar la animación*/
+    imgTranvia.style.animation = null;
+}
+
+function todosEnVacio() {
+    for(let boton of botones) {
+        boton.style.fill = "#20B2AA";
     }
 }
 
-todasEnRojo();
-
-if(cbModo.options[cbModo.selectedIndex].value.toLowerCase() === "manual") {
-    //alert("Manuel");
-    setInterval(manualModo, 1000);
-} else if(cbModo.options[cbModo.selectedIndex].value.toLowerCase() === "automatico") {
-    //alert("Automatico");
-    setInterval(automaticoModo, 1000);
+function automatico() {
+    arrancarAutomatico();
 }
 
-cbModo.addEventListener('change', function() {
-    if(cbModo.options[cbModo.selectedIndex].value.toLowerCase() === "manual") {
-        //alert("Manuel");
-
-    } else if(cbModo.options[cbModo.selectedIndex].value.toLowerCase() === "automatico") {
-        //alert("Automatico");
-        setInterval(automaticoModo, 1000);
-    }
+async function arrancarAutomatico() {
+    while (true) {
+    for(let posicionAutomatico = 0; posicionAutomatico <=4;  posicionAutomatico++) {
+    
+        imgTranvia.addEventListener("animationend", listener,false);
+    
+        document.querySelector(':root').style.setProperty("--posorigen",array_pos_paradas[posicionAutomatico]);
+        document.querySelector(':root').style.setProperty("--posdestino",array_pos_paradas[posicionAutomatico + 1]);
         
-});
+        botones[posicionAutomatico ].style.fill = "green";
+        botones[posicionAutomatico + 1].style.fill = "#FFD700";
+        let promise = new Promise((resolve, reject) => {
+            setTimeout(() => resolve("Esperar"), 2000);
+            imgTranvia.style.animationPlayState = "running" ; 
+            console.log("arranco la animacion");
+            //Modificar las variables del servidor
+        });
+    
+        let result = await promise;
+
+        reiniciarAnimacion();
+        console.log("animacion finalizada");
+         
+        todosEnVacio();
+        
+    }
+    for(let posicionAutomatico = 5; posicionAutomatico >= 1; posicionAutomatico--) {imgTranvia.addEventListener("animationend", listener,false);
+    
+    document.querySelector(':root').style.setProperty("--posorigen",array_pos_paradas[posicionAutomatico]);
+    document.querySelector(':root').style.setProperty("--posdestino",array_pos_paradas[posicionAutomatico - 1]);
+    
+
+    botones[posicionAutomatico].style.fill = "green";
+    botones[posicionAutomatico - 1].style.fill = "#FFD700";
+
+    let promise = new Promise((resolve, reject) => {
+        setTimeout(() => resolve("Esperar"), 2000);
+        imgTranvia.style.animationPlayState = "running" ; 
+        console.log("arranco la animacion");
+        //Modificar las variables del servidor
+    });
+    let result = await promise;
+    
+    reiniciarAnimacion();
+    console.log("animacion finalizada");
+     
+    todosEnVacio();
+    
+        }
+    }
+}

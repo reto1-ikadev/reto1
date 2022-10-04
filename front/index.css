@@ -1,4 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Gruppo&display=swap');
+:root{
+    --posdestino:0%;
+    --posorigen:5%;
+}
 *{
     margin:0;
     padding:0;
@@ -8,15 +12,15 @@ dt{
 }
 body{
     box-sizing: border-box;
-    min-height: 100vh;
+    max-height: 120vh;
     display: grid;
-    grid-template-columns: 50% 50%;
-    grid-template-rows: 9% 62% 12% 17%;
+    grid-template-columns: 100%;
+    grid-template-rows: 9% 40% 12% 17%;
     grid-template-areas:
-            "cab cab"
-            "anim anim"
-            "con con"
-            "foot foot";
+            "cab"
+            "anim"
+            "con"
+            "foot";
     font-size: 1em;
 }
 section{
@@ -28,11 +32,15 @@ header{
     grid-area: cab;
     justify-content: space-between;
     justify-items: center;
-    
 }
+
 nav{
     padding-left: 1em;
     padding-top: 1.2em;
+    font-size: .6em;
+}
+nav p{
+    padding-bottom:.3em ;
 }
 
 #titulo{
@@ -43,16 +51,18 @@ nav{
 
 #animacion{
     background-color: white;
+    
 }
-#animacion img{
-    width: 100%;
-}
+
 #control{
-    padding-top: .2em;
+    
     justify-content: space-around;
-    background-color: rgb(77, 97, 97);
+    background-color: rgba(77, 97, 97,.5);
     grid-area: con;
     border:1px solid grey;
+    margin-left: .2em;
+    margin-right: .2em;
+    margin-bottom: .2em;
 }
 #botones{
     display: flex;
@@ -112,7 +122,7 @@ footer dt{
 }
 @media screen and (max-width: 259px){
     body{
-        grid-template-rows: 15% 50% 12% 17%;
+        grid-template-rows: 8% 50% 12% 17%;
     }
     #titulo{
         text-align: right;
@@ -132,13 +142,13 @@ footer dt{
 }
 @media screen and (min-width:768px) {
     body{
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 100%;
     grid-template-rows: 9% 62% 12% 17%;
     grid-template-areas: 
-    "cab cab"
-    "anim anim"
-    "con anim"
-    "foot foot";
+    "cab"
+    "anim"
+    "con"
+    "foot";
     }
 
 }
@@ -147,14 +157,37 @@ footer dt{
     width: 70%;
     margin: 0 auto;
     }
-    #animacion img{
-        width: 50%;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;   
-    }
+   
     #botones{
         padding-left: 5em;
-        padding-top: 0.5em;
+        
    }
 }
+#tren1{
+    width: 62px;
+    height: 66px;
+}
+#anim_tranvia1{
+    animation-name: anim_tranvia;
+    overflow: hidden;
+    margin-left: var(--posorigen);
+    animation-duration: 2s;
+    animation-direction: normal;
+    animation-delay: 0.2s;
+    animation-iteration-count:1;
+    animation-timing-function: ease-in-out;
+    animation-play-state: paused;
+}
+
+@keyframes anim_tranvia{
+    from{
+        margin-left: var(--posorigen);
+        width: 100%;
+    }
+    to{
+        margin-left: var(--posdestino);
+    }
+}
+
+
+
