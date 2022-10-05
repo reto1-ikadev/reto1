@@ -77,10 +77,18 @@ function parar(){
 }
 
  function arrancar(){
+    recibirDatos();
     console.log("arranco la animacion");
-    fetch("datos.html", {body: "%22app%22.estado_parada_actual=" + pos_destino+"",headers: {"Content-Type":"application/-x-www-urlencode",},method:"post"});
+    fetch("datos.html", { body: "%22app%22.estado_parada_actual=" + pos_destino+ "", headers: { "Content-Type": "application/-x-www-urlencoded",}, method: "post"});
+	fetch("datos.html", { body: "%22app%22.estado_movimiento=1", headers: { "Content-Type": "application/-x-www-urlencoded",}, method: "post"});
     /*accedo al elemento css donde están las variables y cambio el valor 
     de la variable posorigen por una de las posiciones guardadas en el array_pos_paradas */
+	if(pos_origen < pos_destino){
+		fetch("datos.html", { body: "%22app%22.estado_direccion=1", headers: { "Content-Type": "application/-x-www-urlencoded",}, method: "post"});
+	}else{
+		fetch("datos.html", { body: "%22app%22.estado_direccion=0", headers: { "Content-Type": "application/-x-www-urlencoded",}, method: "post"});
+	}
+		
     imgTranvia.style.animationPlayState = "running" ;
     todosEnVacio();
     if(typeof pos_destino !== 'undefined') {
@@ -131,6 +139,7 @@ function actualizarPosDestino(){
 function reiniciarAnimacion(){
     /*Esta funcion la he tenido que crear para que el tranvia se vuelva a mover cada vez que pulso go. 
     Sin esto, la animación se para en una parada y no vuelve a arrancar. Solo ejecuta un ciclo*/
+    fetch("datos.html", { body: "%22app%22.estado_movimiento=0", headers: { "Content-Type": "application/-x-www-urlencoded",}, method: "post"});
     imgTranvia.style.animation = "none";
     imgTranvia.offsetHeight; /*Con esto consigo actualizar la animación*/
     imgTranvia.style.animation = null;
