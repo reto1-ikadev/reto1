@@ -9,6 +9,7 @@ var pos_origen ;
 var pos_destino = 1;
 const imgTranvia = document.getElementById("anim_tranvia1");
 var botones = document.querySelectorAll(".boton");
+var varAuto = 1;
 
 /*Boton para arrancar la animacion*/
 var bGo;
@@ -38,7 +39,7 @@ function ocultar(event){
     modo = " ";
     modo = event.target.value;
     console.log("modo " + modo);
-    if(modo != "manual"){
+    if(modo === "automatico"){
         cuadro = document.getElementById("control");
         console.log(cuadro + " cuadro");
         cuadro.style.display = "none";
@@ -46,9 +47,11 @@ function ocultar(event){
         // cuadro.style.display = cuadro.value = "none";
         // Pero no hay ninguna diferencia entre las dos.
         console.log("desaparezco");
+        varAuto = 0;
         automatico();
     }
-    else{
+    else if(modo === "manual"){
+        varAuto = 1;
         console.log("aparezco");
         //cuadro.style.display= cuadro.value = "block";
         cuadro.style.display = "block";
@@ -137,8 +140,12 @@ function automatico() {
 
 async function arrancarAutomatico() {
     while (true) {
+        
     for(let posicionAutomatico = 0; posicionAutomatico <=4;  posicionAutomatico++) {
-    
+        if(varAuto === 1) {
+            todosEnVacio();
+            break;
+        }
         imgTranvia.addEventListener("animationend", listener,false);
     
         document.querySelector(':root').style.setProperty("--posorigen",array_pos_paradas[posicionAutomatico]);
@@ -161,28 +168,36 @@ async function arrancarAutomatico() {
         todosEnVacio();
         
     }
-    for(let posicionAutomatico = 5; posicionAutomatico >= 1; posicionAutomatico--) {imgTranvia.addEventListener("animationend", listener,false);
-    
-    document.querySelector(':root').style.setProperty("--posorigen",array_pos_paradas[posicionAutomatico]);
-    document.querySelector(':root').style.setProperty("--posdestino",array_pos_paradas[posicionAutomatico - 1]);
-    
+    for(let posicionAutomatico = 5; posicionAutomatico >= 1; posicionAutomatico--) {
+        if(varAuto === 1) {
+            todosEnVacio();
+            break;
+        }
+        imgTranvia.addEventListener("animationend", listener,false);
+        document.querySelector(':root').style.setProperty("--posorigen",array_pos_paradas[posicionAutomatico]);
+        document.querySelector(':root').style.setProperty("--posdestino",array_pos_paradas[posicionAutomatico - 1]);
+        
 
-    botones[posicionAutomatico].style.fill = "green";
-    botones[posicionAutomatico - 1].style.fill = "#FFD700";
+        botones[posicionAutomatico].style.fill = "green";
+        botones[posicionAutomatico - 1].style.fill = "#FFD700";
 
-    let promise = new Promise((resolve, reject) => {
-        setTimeout(() => resolve("Esperar"), 2000);
-        imgTranvia.style.animationPlayState = "running" ; 
-        console.log("arranco la animacion");
-        //Modificar las variables del servidor
-    });
-    let result = await promise;
+        let promise = new Promise((resolve, reject) => {
+            setTimeout(() => resolve("Esperar"), 2000);
+            imgTranvia.style.animationPlayState = "running" ; 
+            console.log("arranco la animacion");
+            //Modificar las variables del servidor
+        });
+        let result = await promise;
+
+        reiniciarAnimacion();
+        console.log("animacion finalizada");
+            
+        todosEnVacio();
     
-    reiniciarAnimacion();
-    console.log("animacion finalizada");
-     
-    todosEnVacio();
-    
+        }
+        if(varAuto === 1) {
+            todosEnVacio();
+            break;
         }
     }
 }
