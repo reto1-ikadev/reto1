@@ -8,26 +8,8 @@ arrayModos.addEventListener("change", ocultar);
 var pos_origen ;
 var pos_destino ;
 const imgTranvia = document.getElementById("anim_tranvia1");
-
-
-
-class Prueba{
-    constructor(jsonrpc, id, result){
-        this.jsonrpc = jsonrpc;
-        this.id = jsonrpc;
-        this.result = result
-    }
-}
-
-
-var arrayVariables = new Array();
-arrayVariables.push(new Prueba("2.0", 1, 1));
-arrayVariables.push(new Prueba("2.0", 2, 1));
-arrayVariables.push(new Prueba("2.0", 3, 2));
-arrayVariables.push(new Prueba("2.0", 4, 4));
-
-console.log(arrayVariables.length)
-
+var botones = document.querySelectorAll(".boton");
+var varAuto = 1;
 
 
 
@@ -43,7 +25,8 @@ bStop = document.getElementById("stop");
 bStop.addEventListener("click", parar);
 
 /*ComboBox paradas. Actualizar variables de las paradas*/
-pos_origen = estadoParadaActual();
+//Esperar a estar con el plc antes de descomentar la linea de abajo
+//pos_origen = estadoParadaActual();
 var selector_destino = document.getElementById("destino");
 // selector_origen.addEventListener("change", actualizarPosOrigen);
 selector_destino.addEventListener("change", actualizarPosDestino);
@@ -51,15 +34,16 @@ imgTranvia.addEventListener("animationend", listener,false);
 //imgTranvia.className = "animacion";
 imgTranvia.id =  "anim_tranvia1";
 
-actualizarPosOrigen();
+//actualizarPosOrigen();
 var posicionAutomatico = 0;
 var posicionAutomaticoReversa = 6;
 
+// Funcion para ocultar o mostrar el Div de los controles
 function ocultar(event){
     modo = " ";
     modo = event.target.value;
     console.log("modo " + modo);
-    if(modo === "automatico"){
+    if(modo == "automatico"){
         cuadro = document.getElementById("control");
         console.log(cuadro + " cuadro");
         cuadro.style.display = "none";
@@ -70,11 +54,11 @@ function ocultar(event){
         varAuto = 0;
         automatico();
     }
-    else if(modo === "manual"){
+    else if(modo == "manual"){
         varAuto = 1;
         console.log("aparezco");
         //cuadro.style.display= cuadro.value = "block";
-        cuadro.style.display = "block";
+        //cuadro.style.display = "block";
     }
 }
 
@@ -94,14 +78,20 @@ function parar(){
     /*accedo al elemento css donde están las variables y cambio el valor 
     de la variable posorigen por una de las posiciones guardadas en el array_pos_paradas */
     imgTranvia.style.animationPlayState = "running" ;
-    todosEnVacio();
+    /*todosEnVacio();
     if(typeof pos_destino !== 'undefined') {
         if(pos_destino !== "0") {
             botones[pos_destino - 1].style.fill = "#FFD700";
             console.log(imgTranvia.style.animationPlayState);
         }
-    }
+    }*/
  }
+
+ function todosEnVacio() {
+    for(let boton of botones) {
+        boton.style.fill = "#20B2AA";
+    }
+}
 
  
 function listener(event){
