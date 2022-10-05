@@ -1,4 +1,0 @@
-<!-- AWP_In_Variable Name = '"Start"'-->
-<!-- AWP_In_Variable Name = '"Stop"'-->
-<!-- AWP_In_Variable Name = '"Reset"'-->
-<-- AWP_Enum_Def Name="listado" Values='0:"Parado",1:"Cronometrando",2:"Puesta a cero"' -->

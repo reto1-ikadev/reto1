@@ -1,4 +1,4 @@
-"use strict"
+"use restrict"
 var arrayModos = new Array();
 var array_pos_paradas = ["5%","21.8%","38.6%","55.4%","72.2%","89%"];
 var modo;
@@ -6,11 +6,32 @@ var cuadro
 arrayModos = document.getElementById("modo");
 arrayModos.addEventListener("change", ocultar);
 var pos_origen ;
-var pos_destino = 1;
+var pos_destino ;
 const imgTranvia = document.getElementById("anim_tranvia1");
-var botones = document.querySelectorAll(".boton");
-var varAuto = 1;
 
+
+
+class Prueba{
+    constructor(jsonrpc, id, result){
+        this.jsonrpc = jsonrpc;
+        this.id = jsonrpc;
+        this.result = result
+    }
+}
+
+
+var arrayVariables = new Array();
+arrayVariables.push(new Prueba("2.0", 1, 1));
+arrayVariables.push(new Prueba("2.0", 2, 1));
+arrayVariables.push(new Prueba("2.0", 3, 2));
+arrayVariables.push(new Prueba("2.0", 4, 4));
+
+console.log(arrayVariables.length)
+
+
+
+
+//recibirDatos(); //Recibir los Datos nada mas abrir la pagina.
 /*Boton para arrancar la animacion*/
 var bGo;
 bGo = document.getElementById("rearme");
@@ -22,9 +43,7 @@ bStop = document.getElementById("stop");
 bStop.addEventListener("click", parar);
 
 /*ComboBox paradas. Actualizar variables de las paradas*/
-var pos_inicio;
-var pos_final;
-var selector_origen = document.getElementById("origen");
+pos_origen = estadoParadaActual();
 var selector_destino = document.getElementById("destino");
 // selector_origen.addEventListener("change", actualizarPosOrigen);
 selector_destino.addEventListener("change", actualizarPosDestino);
@@ -32,6 +51,7 @@ imgTranvia.addEventListener("animationend", listener,false);
 //imgTranvia.className = "animacion";
 imgTranvia.id =  "anim_tranvia1";
 
+actualizarPosOrigen();
 var posicionAutomatico = 0;
 var posicionAutomaticoReversa = 6;
 
@@ -107,10 +127,9 @@ function actualizarPosOrigen(){
     console.log("f(x) actualizar variables");
     /*Obtengo la parada de origen y la del destino para asegurar que no han seleccionado la misma en 
     origen y en destino*/
-    //pos_origen = selector_origen.options[selector_origen.selectedIndex].value;
     /*Cambio las variables en el css para que la animacion se mueva de una parada a otra */
-    document.querySelector(':root').style.setProperty("--posorigen",array_pos_paradas[pos_origen-1]);
-    console.log("array"+array_pos_paradas[pos_origen-1]);
+    document.querySelector(':root').style.setProperty("--posorigen",array_pos_paradas[pos_origen]);
+    console.log("array"+array_pos_paradas[pos_origen]);
 }
 
 
@@ -128,16 +147,41 @@ function reiniciarAnimacion(){
     imgTranvia.style.animation = null;
 }
 
-function todosEnVacio() {
-    for(let boton of botones) {
-        boton.style.fill = "#20B2AA";
-    }
+var datosRecibidos;
+async function recibirDatos(){
+    datosRecibidos = await fetch("datos.html").then((response) => response.json()).then((datos)=> {return datos } );
+    pos_origen = estadoParadaActual();
+    actualizarPosOrigen();
+} 
+
+
+function estadoMarchaParo(){
+    let estadoMarPar = datosRecibidos['marcha'];
+    return estadoMarPar;
+
 }
+function estadoDireccion(){
+    let estadoDir = datosRecibidos['direccion'];
+    return estadoDir;
+
+}
+function estadoVelocidad(){
+    let estadoVel = datosRecibidos['velocidad'];
+    return estadoVel;}
 
 function automatico() {
     arrancarAutomatico();
 }
 
+
+function estadoParadaActual(){
+    let estadoParAct = datosRecibidos['parada'];
+    return estadoParAct;
+}
+function estadoMovimiento(){
+    let estadoParAct = datosRecibidos['movimiento'];
+    return estadoParAct;
+}
 async function arrancarAutomatico() {
     while (true) {
         
