@@ -78,7 +78,8 @@ function ocultar(event){
     }
 }
 
-function parar(){
+async function parar(){
+	await fetch("datos.html", { body: "%22app%22.estado_parada_actual=3", headers: {"Content-Type": "application/x-www-form-urlencoded", }, method: "post" });
     console.log("paro el tranvia");
     imgTranvia.style.animationPlayState = "paused" ;
     if(typeof pos_destino !== 'undefined') {
