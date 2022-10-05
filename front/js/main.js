@@ -10,10 +10,14 @@ var pos_destino ;
 const imgTranvia = document.getElementById("anim_tranvia1");
 var botones = document.querySelectorAll(".boton");
 var varAuto = 1;
+/*Esto es lo primero que se ejecuta al arrancar. Pide la posicion del tranvia al plc*/
+//Esperar a estar con el plc antes de descomentar la linea de abajo
+
+//recibirDatosIniciales(); //Recibir los Datos nada mas abrir la pagina.
 
 
 
-//recibirDatos(); //Recibir los Datos nada mas abrir la pagina.
+
 /*Boton para arrancar la animacion*/
 var bGo;
 bGo = document.getElementById("rearme");
@@ -25,10 +29,9 @@ bStop = document.getElementById("stop");
 bStop.addEventListener("click", parar);
 
 /*ComboBox paradas. Actualizar variables de las paradas*/
-//Esperar a estar con el plc antes de descomentar la linea de abajo
-//pos_origen = estadoParadaActual();
+
 var selector_destino = document.getElementById("destino");
-// selector_origen.addEventListener("change", actualizarPosOrigen);
+// selector_origen.addEventListener("change", actualizarPosOrigen);º
 selector_destino.addEventListener("change", actualizarPosDestino);
 imgTranvia.addEventListener("animationend", listener,false);
 //imgTranvia.className = "animacion";
@@ -78,13 +81,13 @@ function parar(){
     /*accedo al elemento css donde están las variables y cambio el valor 
     de la variable posorigen por una de las posiciones guardadas en el array_pos_paradas */
     imgTranvia.style.animationPlayState = "running" ;
-    /*todosEnVacio();
+    todosEnVacio();
     if(typeof pos_destino !== 'undefined') {
         if(pos_destino !== "0") {
             botones[pos_destino - 1].style.fill = "#FFD700";
             console.log(imgTranvia.style.animationPlayState);
         }
-    }*/
+    }
  }
 
  function todosEnVacio() {
@@ -115,8 +118,6 @@ function listener(event){
 
 function actualizarPosOrigen(){
     console.log("f(x) actualizar variables");
-    /*Obtengo la parada de origen y la del destino para asegurar que no han seleccionado la misma en 
-    origen y en destino*/
     /*Cambio las variables en el css para que la animacion se mueva de una parada a otra */
     document.querySelector(':root').style.setProperty("--posorigen",array_pos_paradas[pos_origen]);
     console.log("array"+array_pos_paradas[pos_origen]);
@@ -136,25 +137,35 @@ function reiniciarAnimacion(){
     imgTranvia.offsetHeight; /*Con esto consigo actualizar la animación*/
     imgTranvia.style.animation = null;
 }
-
+/** Esta funcion posiciona el tranvia en la parada que se recibe del plc. Realiza una peticion de datos y llama a la f(x) actualizarPosOrigen*/
 var datosRecibidos;
-async function recibirDatos(){
+async function recibirDatosIniciales(){
     datosRecibidos = await fetch("datos.html").then((response) => response.json()).then((datos)=> {return datos } );
     pos_origen = estadoParadaActual();
     actualizarPosOrigen();
+    estadoStopGo = estadoMarchaParo();
+    direccion = estadoDireccion();
+    velocidad = estadoVelocidad();
+
 } 
 
-
+async function recibirDatos(){
+    datosRecibidos = await fetch("datos.html").then((response) => response.json()).then((datos)=> {return datos } );
+    pos_origen = estadoParadaActual();
+} 
+var estadoStopGo;
 function estadoMarchaParo(){
     let estadoMarPar = datosRecibidos['marcha'];
     return estadoMarPar;
 
 }
+var direccion;
 function estadoDireccion(){
     let estadoDir = datosRecibidos['direccion'];
     return estadoDir;
 
 }
+var velocidad;
 function estadoVelocidad(){
     let estadoVel = datosRecibidos['velocidad'];
     return estadoVel;}
@@ -163,7 +174,7 @@ function automatico() {
     arrancarAutomatico();
 }
 
-
+/*Esta funcion coge del result del fetch la parada y actualiza la parada actual*/
 function estadoParadaActual(){
     let estadoParAct = datosRecibidos['parada'];
     return estadoParAct;
@@ -172,6 +183,7 @@ function estadoMovimiento(){
     let estadoParAct = datosRecibidos['movimiento'];
     return estadoParAct;
 }
+
 async function arrancarAutomatico() {
     while (true) {
         
