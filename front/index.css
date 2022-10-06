@@ -14,8 +14,8 @@ body{
     box-sizing: border-box;
     max-height: 120vh;
     display: grid;
-    grid-template-columns: 50% 50%;
-    grid-template-rows: 9% 40% 12% 17%;
+    grid-template-columns: 49% 49%;
+    grid-template-rows: 20% 29% 17% 17%;
     grid-template-areas:
             "cab cab"
             "anim anim"
@@ -28,7 +28,7 @@ section{
 }
 header{
     display:flex;
-    background-color:#006f2b;
+    background-color:rgba(0,111,43,.8);
     grid-area: cab;
     justify-content: space-between;
     justify-items: center;
@@ -41,25 +41,34 @@ nav{
 }
 nav p{
     padding-bottom:.3em ;
+    font-family: 'Gruppo', cursive;
+    font-weight: bold;
+    font-size: 1.2em;
 }
 
 #titulo{
     font-family: 'Gruppo', cursive;
     padding-right: 2em;
-    padding-top: .7em;
+    padding-top: 4em;
+    font-weight: bold;
+}
+h6{
+    font-size: 1em;
+}
+h1{
+    font-size: 2.5em;
 }
 
 #animacion{
+    padding-top:4em ;
     background-color: white;
-    
 }
 
 #control{
-    
     justify-content: space-around;
     background-color: rgba(77, 97, 97,.5);
     grid-area: con;
-    border:1px solid grey;
+    border:3px outset grey;
     margin-left: .2em;
     margin-right: .2em;
     margin-bottom: .2em;
@@ -67,7 +76,8 @@ nav p{
 #botones{
     display: flex;
     justify-content: center;
-    margin-left: 2em;
+    margin-left: 12em;
+    margin-top: 2em;
 }
 #stop{
     margin-right: 2em;
@@ -89,7 +99,7 @@ nav p{
 }
 #stop{
     background-color: red;
-    padding:.7em .5em;
+    padding:.7em .7em;
     border-radius: 50%;
     font-size:.8em;
 }
