@@ -12,10 +12,10 @@ dt{
 }
 body{
     box-sizing: border-box;
-    max-height: 120vh;
+    max-height: 100vh;
     display: grid;
-    grid-template-columns: 49% 49%;
-    grid-template-rows: 20% 29% 17% 17%;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 17% 57% 13% 13%;
     grid-template-areas:
             "cab cab"
             "anim anim"
@@ -43,7 +43,7 @@ nav p{
     padding-bottom:.3em ;
     font-family: 'Gruppo', cursive;
     font-weight: bold;
-    font-size: 1.2em;
+    font-size: 1.7em;
 }
 
 #titulo{
@@ -60,10 +60,14 @@ h1{
 }
 
 #animacion{
-    padding-top:4em ;
+    padding-top:1em ;
     background-color: white;
 }
+#linea{
+    z-index: 1;
+    width: 100%;
 
+}
 #control{
     justify-content: space-around;
     background-color: rgba(77, 97, 97,.5);
@@ -72,12 +76,13 @@ h1{
     margin-left: .2em;
     margin-right: .2em;
     margin-bottom: .2em;
+    visibility: hidden;
 }
 #botones{
     display: flex;
-    justify-content: center;
-    margin-left: 12em;
-    margin-top: 2em;
+    margin-top: 0.1em;
+    margin-left: 0.2em;
+    
 }
 #stop{
     margin-right: 2em;
@@ -99,7 +104,7 @@ h1{
 }
 #stop{
     background-color: red;
-    padding:.7em .7em;
+    padding:.9em .9em;
     border-radius: 50%;
     font-size:.8em;
 }
@@ -112,7 +117,7 @@ h1{
 
 #arrancar{
         background-color: rgb(14, 194, 68);
-        padding:.7em .7em;
+        padding:.9em .9em;
         border-radius: 50%;
         font-size:.8em;
 }
@@ -143,9 +148,6 @@ footer dt{
     }
 }
 @media screen and (max-width: 259px){
-    body{
-        grid-template-rows: 8% 50% 12% 17%;
-    }
     #titulo{
         text-align: right;
         padding-bottom: 1em;
@@ -164,8 +166,6 @@ footer dt{
 }
 @media screen and (min-width:768px) {
     body{
-    grid-template-columns: 50% 50%;
-    grid-template-rows: 9% 62% 12% 17%;
     grid-template-areas: 
     "cab cab"
     "anim anim"
@@ -177,19 +177,21 @@ footer dt{
 @media (min-width: 1024px) {
     body{
     width: 70%;
+    grid-template-rows: 17% 57% 13% 13%;
     margin: 0 auto;
     }
    
     #botones{
-        padding-left: 5em;
+        padding-left: 1em;
         
    }
 }
 #tren1{
-    width: 62px;
-    height: 66px;
+    width: 70px;
+    height: 70px;
 }
 #anim_tranvia1{
+    margin-top: 10em;
     animation-name: anim_tranvia;
     overflow: hidden;
     margin-left: var(--posorigen);

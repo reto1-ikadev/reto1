@@ -15,9 +15,9 @@
             <nav>
                 <p>Modo:</p>
                 <select id="modo" name="menu" size="1">
-                    <option>Seleccione</option>
-                    <option value ="manual">Manual</option>
-                    <option value="automatico">Autom&aacute;tico</option>
+                    <option value="0">Seleccione</option>
+                    <option value="1">Manual</option>
+                    <option value="2">Autom&aacute;tico</option>
                </select>
             </nav>
             <div id="titulo">
@@ -27,11 +27,18 @@
         </header>
 
         <section id="animacion">
+            <div id ="botones">
+                <div id="marchaMaquina">
+                    <input type="button" id="arrancar" value ="On">
+                 </div>
+                 <div id="paro">
+                    <input style="margin-left: 10px;" type="button" id="stop" value="Off">
+                </div>
+            </div>  
             <div id="anim_tranvia1">
                 <img id="tren1" src="imagenes/tranvia3.png">
             </div>
-           
-                <svg width="100%" viewBox = "0 0 120 120">
+                <svg viewBox="0 0 120 40" id="linea">
                 <line x1="10" y1="10" x2="92%" y2="10" stroke-width=".7" style= "stroke: black"/>
                 <circle class="boton" cx="10" cy="10" r="2" stroke-width="4" fill="#20B2AA"/>
                 <circle class="boton" cx="30" cy="10" r="2" stroke-width="4" fill="#20B2AA"/>
@@ -42,6 +49,7 @@
             </svg>
             
         </section>
+        
         <section id="control">
             <p>Parada destino</p> 
             <div id="select">
@@ -60,14 +68,6 @@
                     <input type="button" id="rearme" value ="Mover">
                  </div>
             </div>
-                <div id ="botones">
-                    <div id="paro">
-                        <input type="button" id="stop" value="Off">
-                    </div>
-                    <div id="marchaMaquina">
-                        <input type="button" id="arrancar" value ="On">
-                     </div>
-                </div>  
         </section>
         <footer>
             <dl>
