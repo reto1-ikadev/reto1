@@ -1,0 +1,222 @@
+@import url('https://fonts.googleapis.com/css2?family=Gruppo&display=swap');
+:root{
+    --posdestino:0%;
+    --posorigen:5%;
+}
+*{
+    margin:0;
+    padding:0;
+}
+
+body{
+    width: 100%;
+    height: 100vh;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 30% 70%;
+    grid-template-rows: repeat(4s, auto);
+    grid-template-areas:
+            "cab cab"
+            "anim anim"
+            "con con"
+            "foot foot";
+    font-size: 1em;
+}
+section{
+    grid-area: anim;
+  
+}
+
+header{
+    display:flex;
+    background-color:rgba(0,111,43,.8);
+    grid-area: cab;
+    justify-content: space-between;
+    justify-items: center;
+}
+#cab{
+    display: flex;
+    height: 100%;
+}
+nav{
+    padding-top: 1em;
+    padding-left: 2em;
+    font-size: .6em;
+}
+nav p{
+    padding-bottom: .7em;
+    font-family: 'Gruppo', cursive;
+    font-weight: bold;
+    font-size: 1.7em;
+}
+
+#titulo{
+    padding-right: 2em;
+    font-family: 'Gruppo', cursive;
+    font-weight: bold;
+}
+h6{
+    font-size: 1em;
+}
+h1{
+    font-size: 2.5em;
+}
+
+#animacion{
+    background-color: white;
+}
+
+#control{
+    justify-content: space-around;
+    background-color: rgba(77, 97, 97,.5);
+    grid-area: con;
+    border:3px outset grey;
+    /*visibility: hidden;*/
+}
+#botones{
+    padding-left: 2em;
+    padding-top: 1em;
+    padding-bottom: 5em;
+    display: flex;
+    justify-content: flex-start;
+    align-content: center;
+}
+
+#select{
+    padding-left: .5em;
+    display: flex;
+    align-items: flex-start;
+    justify-content: baseline;
+}
+#control p{
+    padding: .3em;
+}
+#paro{
+    display:flex;
+}
+#stop{
+padding: .6rem 2rem;
+border: 1px solid #992b09;
+border-radius: 4px;
+background-color: #d9340b;
+color: #fff;
+font-size: 1.5rem;
+text-shadow: 0 -1px 0 rgba(0,0,0,.5);
+box-shadow: 0 1px 0 rgba(255,255,255,.5) inset,
+    0 1px 3px rgba(0,0,0,.2);
+    0 1px 3px rgba(0,0,0,.2);
+font-size:.8em;
+}
+
+#stop:active{
+    background-color: #992b09;
+}
+
+#arrancar{
+padding: .6rem 2rem;
+border: 1px solid #065e06;
+border-radius: 4px;
+background-color: rgb(14, 194, 68);
+color: #fff;
+font-size: 1.5rem;
+text-shadow: 0 -1px 0 rgba(0,0,0,.5);
+box-shadow: 0 1px 0 rgba(255,255,255,.5) inset,
+    0 1px 3px rgba(0,0,0,.2);
+    0 1px 3px rgba(0,0,0,.2);
+font-size:.8em;
+}
+
+#arrancar:active{
+    background-color: #065e06;
+}
+
+#rearme{
+padding: .4rem 1rem;
+border: 1px solid #065e06;
+border-radius: 4px;
+background-color: rgb(14, 194, 68);
+color: #fff;
+font-size: 1.5rem;
+text-shadow: 0 -1px 0 rgba(0,0,0,.5);
+box-shadow: 0 1px 0 rgba(255,255,255,.5) inset,
+    0 1px 3px rgba(0,0,0,.2);
+    0 1px 3px rgba(0,0,0,.2);
+font-size:.8em;
+}
+
+#marcha{
+    padding-left: 2em ;
+    display: flex;
+}
+
+footer{
+    display: flex;
+    background-color: #cccccc;
+    grid-area: foot;
+    font-size: .7em;
+    justify-content: space-around;
+}
+
+footer dd{
+   padding-bottom: .2em;;
+}
+
+footer dl{
+    padding-top: .4em;
+}
+footer dt{
+    border-bottom: 1.4px dotted black; 
+    padding-bottom: .3em;
+    margin-bottom: .3em;
+    font-weight: bold;
+}
+
+@media screen and (min-width:768px) {
+    body{
+        grid-template-areas:
+        "cab cab"
+        "anim anim"
+        "con ."
+        "foot foot";
+    }
+}
+
+@media (min-width: 1024px) {
+    body{
+        grid-template-areas:
+        "cab cab"
+        "anim anim"
+        "con ."
+        "foot foot";
+    }
+}
+
+#tren1{
+    width: 10%;
+    height: 15%;
+}
+
+#anim_tranvia1{
+    animation-name: anim_tranvia;
+    overflow: hidden;
+    margin-left: var(--posorigen);
+    animation-duration: 2s;
+    animation-direction: normal;
+    animation-delay: 0.2s;
+    animation-iteration-count:1;
+    animation-timing-function: ease-in-out;
+    animation-play-state: paused;
+}
+
+@keyframes anim_tranvia{
+    from{
+        margin-left: var(--posorigen);
+        width: 100%;
+    }
+    to{
+        margin-left: var(--posdestino);
+    }
+}
+
+
+

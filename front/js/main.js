@@ -1,6 +1,6 @@
 "use restrict"
 var arrayModos = new Array();
-var array_pos_paradas = ["5%","21.8%","38.6%","55.4%","72.2%","89%"];
+var array_pos_paradas = ["5%","50%","38.6%","55.4%","72.2%","89%"];
 var modo;
 var cuadro
 arrayModos = document.getElementById("modo");
@@ -158,7 +158,6 @@ function reiniciarAnimacion(){
 
 
 /******************************FUNCIONES DE COMUNICACION CON EL PLC ******************************************************************** */
-Function 
 
 
 
