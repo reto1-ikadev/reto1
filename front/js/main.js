@@ -1,8 +1,8 @@
 "use restrict"
 var arrayModos = new Array();
-var array_pos_paradas = ["5%","50%","38.6%","55.4%","72.2%","89%"];
+var array_pos_paradas = ["7%","21.6%","36.2%","50.8%","65.4%","80%"];
 var modo;
-var cuadro
+var cuadro;
 arrayModos = document.getElementById("modo");
 arrayModos.addEventListener("change", ocultar);
 var pos_origen ;
@@ -150,7 +150,7 @@ function reiniciarAnimacion(){
     /*Esta funcion la he tenido que crear para que el tranvia se vuelva a mover cada vez que pulso go. 
     Sin esto, la animación se para en una parada y no vuelve a arrancar. Solo ejecuta un ciclo*/
     fetch("datos.html", { body: "%22app%22.estado_movimiento=0", headers: { "Content-Type": "application/-x-www-urlencoded",}, method: "post"});
-    imgTranvia.style.animation = "none";
+    imgTranvia.style.animation = "pause";
     imgTranvia.offsetHeight; /*Con esto consigo actualizar la animación*/
     imgTranvia.style.animation = null;
 }

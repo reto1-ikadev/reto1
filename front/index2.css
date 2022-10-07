@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Gruppo&display=swap');
 :root{
     --posdestino:0%;
-    --posorigen:5%;
+    --posorigen:7%;
 }
 *{
     margin:0;
@@ -14,7 +14,7 @@ body{
     margin: 0 auto;
     display: grid;
     grid-template-columns: 30% 70%;
-    grid-template-rows: repeat(4s, auto);
+    grid-template-rows: 4em 54fr 15fr 15fr;
     grid-template-areas:
             "cab cab"
             "anim anim"
@@ -64,6 +64,10 @@ h1{
 
 #animacion{
     background-color: white;
+    margin-top: 2em;
+}
+#svg_anim{
+    margin-top: 7em;
 }
 
 #control{
@@ -71,13 +75,14 @@ h1{
     background-color: rgba(77, 97, 97,.5);
     grid-area: con;
     border:3px outset grey;
-    /*visibility: hidden;*/
+    margin-bottom: .2em;
+    margin-left: .2em;
+    visibility: hidden;
 }
 #botones{
-    padding-left: 2em;
-    padding-top: 1em;
-    padding-bottom: 5em;
     display: flex;
+    margin-top: .1em;
+    margin-left: 2em;
     justify-content: flex-start;
     align-content: center;
 }
@@ -85,8 +90,8 @@ h1{
 #select{
     padding-left: .5em;
     display: flex;
-    align-items: flex-start;
-    justify-content: baseline;
+   
+    justify-content: flex-start;
 }
 #control p{
     padding: .3em;
@@ -94,18 +99,18 @@ h1{
 #paro{
     display:flex;
 }
+
 #stop{
+margin-left: .3em;
 padding: .6rem 2rem;
 border: 1px solid #992b09;
 border-radius: 4px;
 background-color: #d9340b;
 color: #fff;
-font-size: 1.5rem;
+font-size: .8rem;
 text-shadow: 0 -1px 0 rgba(0,0,0,.5);
 box-shadow: 0 1px 0 rgba(255,255,255,.5) inset,
     0 1px 3px rgba(0,0,0,.2);
-    0 1px 3px rgba(0,0,0,.2);
-font-size:.8em;
 }
 
 #stop:active{
@@ -121,7 +126,6 @@ color: #fff;
 font-size: 1.5rem;
 text-shadow: 0 -1px 0 rgba(0,0,0,.5);
 box-shadow: 0 1px 0 rgba(255,255,255,.5) inset,
-    0 1px 3px rgba(0,0,0,.2);
     0 1px 3px rgba(0,0,0,.2);
 font-size:.8em;
 }
@@ -140,8 +144,12 @@ font-size: 1.5rem;
 text-shadow: 0 -1px 0 rgba(0,0,0,.5);
 box-shadow: 0 1px 0 rgba(255,255,255,.5) inset,
     0 1px 3px rgba(0,0,0,.2);
-    0 1px 3px rgba(0,0,0,.2);
+   
 font-size:.8em;
+}
+#tren1{
+    width: 3em;
+    height: 1.5em;
 }
 
 #marcha{
@@ -171,31 +179,6 @@ footer dt{
     font-weight: bold;
 }
 
-@media screen and (min-width:768px) {
-    body{
-        grid-template-areas:
-        "cab cab"
-        "anim anim"
-        "con ."
-        "foot foot";
-    }
-}
-
-@media (min-width: 1024px) {
-    body{
-        grid-template-areas:
-        "cab cab"
-        "anim anim"
-        "con ."
-        "foot foot";
-    }
-}
-
-#tren1{
-    width: 10%;
-    height: 15%;
-}
-
 #anim_tranvia1{
     animation-name: anim_tranvia;
     overflow: hidden;
@@ -211,12 +194,39 @@ footer dt{
 @keyframes anim_tranvia{
     from{
         margin-left: var(--posorigen);
-        width: 100%;
     }
     to{
         margin-left: var(--posdestino);
     }
 }
 
+@media screen and (min-width:768px) {
+    body{
+        grid-template-rows: 6em auto 5em auto;
+        grid-template-areas:
+        "cab cab"
+        "anim anim"
+        "con con"
+        "foot foot";
+    }
+}
+
+@media (min-width: 1024px) {
+    body{
+        display: grid;
+        grid-template-columns: 30% 70%;
+        grid-template-rows: 6em auto 5em auto;
+        grid-template-areas:
+            "cab cab"
+            "anim anim"
+            "con con"
+            "foot foot";
+    }
+   
+    #tren1{
+        width: 6em;
+        height: 3em;
+    }
+}
 
 
