@@ -1,6 +1,6 @@
 "use strict"
 var arrayModos = new Array();
-var array_pos_paradas = ["5%","21.8%","38.6%","55.4%","72.2%","89%"];
+var array_pos_paradas = ["5%","19.8%","35.6%","50.4%","66.2%","82%"];
 var modo;
 var cuadro
 arrayModos = document.getElementById("modo");
