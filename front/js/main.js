@@ -1,8 +1,8 @@
-"use restrict"
+"use strict"
 var arrayModos = new Array();
-var array_pos_paradas = ["7%","21.6%","36.2%","50.8%","65.4%","80%"];
+var array_pos_paradas = ["5%","21.8%","38.6%","55.4%","72.2%","89%"];
 var modo;
-var cuadro;
+var cuadro
 arrayModos = document.getElementById("modo");
 arrayModos.addEventListener("change", ocultar);
 var pos_origen ;
@@ -24,22 +24,12 @@ bGo.addEventListener("click",arrancar);
 /*Boton parar para parar la animación*/
 var bStop;
 bStop = document.getElementById("stop");
-bStop.addEventListener("click", parar)
+bStop.addEventListener("click", parar);
 
-/*Boton para encender la maquinaria*/
-var bEnviar 
-<<<<<<< HEAD
-/*Boton para encender la maquinaria*/
-=======
->>>>>>> retoques
-var bOn 
+var bEnviar;
 bEnviar = document.getElementById("arrancar");
 bEnviar.addEventListener("click", encender);
-
 /*ComboBox paradas. Actualizar variables de las paradas*/
-
-
-
 
 var selector_destino = document.getElementById("destino");
 
@@ -81,11 +71,7 @@ function ocultar(event){
 }
 /*************************************CONTROLAR LA ANIMACION TRANVIA ******************************************************* */
 async function parar(){
-<<<<<<< HEAD
-    await fetch("datos.html", { body: "%22app%22.estado_marcha_paro=0", headers: {"Content-Type": "application/x-www-form-urlencoded", }, method: "post" });
-=======
     await fetch("datos.html", { body: "%22app%22.estado_marcha_paro=false", headers: {"Content-Type": "application/x-www-form-urlencoded", }, method: "post" });
->>>>>>> retoques
     console.log(estadoMarchaParo());
     console.log("paro el tranvia");
     imgTranvia.style.animationPlayState = "paused" ;
@@ -96,15 +82,9 @@ async function parar(){
     }
 }
 
-async function encender(){
-	await fetch("datos.html", { body: "%22app%22.estado_marcha_paro=1", headers: {"Content-Type": "application/x-www-form-urlencoded", }, method: "post" });
-	console.log(estadoMarchaParo());
-}
-
  async function arrancar(){
-    recibirDatos();
-    if(marchaonomarcha == 1 ){
-
+    await recibirDatos();
+    if(estadoStopGo == "1"){
     console.log("arranco la animacion");
     fetch("datos.html", { body: "%22app%22.estado_parada_actual=" + pos_destino+ "", headers: { "Content-Type": "application/-x-www-urlencoded",}, method: "post"});
 	fetch("datos.html", { body: "%22app%22.estado_movimiento=1", headers: { "Content-Type": "application/-x-www-urlencoded",}, method: "post"});
@@ -115,7 +95,6 @@ async function encender(){
 	}else{
 		fetch("datos.html", { body: "%22app%22.estado_direccion=0", headers: { "Content-Type": "application/-x-www-urlencoded",}, method: "post"});
 	}
-
 		
     imgTranvia.style.animationPlayState = "running" ;
     todosEnVacio();
@@ -125,9 +104,8 @@ async function encender(){
             console.log(imgTranvia.style.animationPlayState);
         }
     }
-}
-else{
-    console.log("mal");
+}else{
+    alert("Arranca la maquina");
 }
  }
  async function encender(){
@@ -176,7 +154,7 @@ function reiniciarAnimacion(){
     /*Esta funcion la he tenido que crear para que el tranvia se vuelva a mover cada vez que pulso go. 
     Sin esto, la animación se para en una parada y no vuelve a arrancar. Solo ejecuta un ciclo*/
     fetch("datos.html", { body: "%22app%22.estado_movimiento=0", headers: { "Content-Type": "application/-x-www-urlencoded",}, method: "post"});
-    imgTranvia.style.animation = "pause";
+    imgTranvia.style.animation = "none";
     imgTranvia.offsetHeight; /*Con esto consigo actualizar la animación*/
     imgTranvia.style.animation = null;
 }
@@ -184,6 +162,7 @@ function reiniciarAnimacion(){
 
 
 /******************************FUNCIONES DE COMUNICACION CON EL PLC ******************************************************************** */
+Function 
 
 
 
@@ -246,8 +225,8 @@ function estadoMovimiento(){
 /*********************************************MODO AUTOMATICO*********************************************************************************** */
 /*Hay que probar si se puede llamar directamente a la funcion arrancarAutomatico sin que este dentro de otra funcion */
 /*El tranvia comienza a moverse en modo automatico */
-function automatico() {
-    recibirDatos();
+async function automatico() {
+    await recibirDatos();
     if(varAuto == 1 && estadoStopGo == "1"){
 
          arrancarAutomatico();
@@ -256,68 +235,91 @@ function automatico() {
 }
 /*Funcion que arranca automatico*/
 async function arrancarAutomatico() {
-    while (estadoStopGo== "1") {
-		recibirDatos();
-    if(direccion ==1){
-    for(let posicionAutomatico = paradaActual; posicionAutomatico <=4 && estadoStopGo == "0";  posicionAutomatico++) {
-		recibirDatos();
-        imgTranvia.addEventListener("animationend", listener,false);
-    
-        document.querySelector(':root').style.setProperty("--posorigen",array_pos_paradas[posicionAutomatico]);
-        document.querySelector(':root').style.setProperty("--posdestino",array_pos_paradas[posicionAutomatico + 1]);
-        
-        botones[posicionAutomatico ].style.fill = "green";
-        botones[posicionAutomatico + 1].style.fill = "#FFD700";
-        let promise = new Promise((resolve, reject) => {
-            setTimeout(() => resolve("Esperar"), 2000);
-            imgTranvia.style.animationPlayState = "running" ; 
-            console.log("arranco la animacion");
-            //Modificar las variables del servidor
-            fetch("datos.html", { body: "%22app%22.estado_parada_actual=" + posicionAutomatico+ "", headers: { "Content-Type": "application/-x-www-urlencoded",}, method: "post"});
-	        fetch("datos.html", { body: "%22app%22.estado_movimiento=1", headers: { "Content-Type": "application/-x-www-urlencoded",}, method: "post"});
-        });
-    
-        let result = await promise;
+   for(var contador =0; contador<2; contador++){
+        if (direccion == 1) {
+            for(var posiconAuto = parseInt(paradaActual); posiconAuto < 5; posiconAuto++){
+                
+                if (estadoStopGo == "0") {
+                    break;
+                }
 
-        reiniciarAnimacion();
-        console.log("animacion finalizada");
-         
-        todosEnVacio();
-        
-    }
-    }
-    else{
-    for(let posicionAutomatico = paradaActual; posicionAutomatico >= 1 && estadoStopGo =="0"; posicionAutomatico--) {
-		recibirDatos();
-        imgTranvia.addEventListener("animationend", listener,false);
-        document.querySelector(':root').style.setProperty("--posorigen",array_pos_paradas[posicionAutomatico]);
-        document.querySelector(':root').style.setProperty("--posdestino",array_pos_paradas[posicionAutomatico - 1]);
-        
+                imgTranvia.addEventListener("animationend", listener, false);
+				console.log(posiconAuto);
+				console.log(posiconAuto+1);
+                document.querySelector(':root').style.setProperty("--posorigen", array_pos_paradas[posiconAuto]);
+				if(posiconAuto !=5){
+                document.querySelector(':root').style.setProperty("--posdestino", array_pos_paradas[posiconAuto + 1]);
+				}
+                botones[posiconAuto].style.fill = "green";
+                if (posiconAuto != 4) {
+                    //botones[posiconAuto + 1].style.fill = "#FFD700";
+                    
+                }
 
-        botones[posicionAutomatico].style.fill = "green";
-        botones[posicionAutomatico - 1].style.fill = "#FFD700";
+                    let promise = new Promise((resolve, reject) => {
+                        setTimeout(() => resolve("Esperar"), 2000);
+                        imgTranvia.style.animationPlayState = "running";
+                        console.log("arranco la animacion");
+                        //Modificar las variables del servidor
+                        fetch("datos.html", { body: "%22app%22.estado_parada_actual=" + (posiconAuto +1) + "", headers: { "Content-Type": "application/-x-www-urlencoded", }, method: "post" });
+                        fetch("datos.html", { body: "%22app%22.estado_movimiento=1", headers: { "Content-Type": "application/-x-www-urlencoded", }, method: "post" });
+                        
+                    });
 
-        let promise = new Promise((resolve, reject) => {
-            setTimeout(() => resolve("Esperar"), 2000);
-            imgTranvia.style.animationPlayState = "running" ; 
-            console.log("arranco la animacion");
-            fetch("datos.html", { body: "%22app%22.estado_parada_actual=" + posicionAutomatico+ "", headers: { "Content-Type": "application/-x-www-urlencoded",}, method: "post"});
-	        fetch("datos.html", { body: "%22app%22.estado_movimiento=0", headers: { "Content-Type": "application/-x-www-urlencoded",}, method: "post"});
-        });
-        let result = await promise;
-
-        reiniciarAnimacion();
-        console.log("animacion finalizada");
-            
-        todosEnVacio();
-        
+                    let result = await promise;
+                    console.log("animacion finalizada");
+                    if (posiconAuto +1 == 5) {
+                        fetch("datos.html", { body: "%22app%22.estado_direccion=0", headers: { "Content-Type": "application/-x-www-urlencoded", }, method: "post" });
+						document.querySelector(':root').style.setProperty("--posorigen", array_pos_paradas[posiconAuto+1]);
+					}
+					reiniciarAnimacion();
+                    todosEnVacio();
+                    
+                    await recibirDatos();    
         }
-        if(varAuto == 0) {
-            todosEnVacio();
-            
         }
-
-    }
-} 
+		else{
+            //reverse direction
+            for(var posiconAuto = parseInt(paradaActual); posiconAuto > 0; posiconAuto--){
+                    
+                    if (estadoStopGo == "0") {
+                        break;
+                    }
     
+                    imgTranvia.addEventListener("animationend", listener, false);
+                    console.log(posiconAuto);
+                    console.log(posiconAuto+1);
+                    document.querySelector(':root').style.setProperty("--posorigen", array_pos_paradas[posiconAuto]);
+                    document.querySelector(':root').style.setProperty("--posdestino", array_pos_paradas[posiconAuto - 1]);
+                    botones[posiconAuto].style.fill = "green";
+                    if (posiconAuto != 4) {
+                        //botones[posiconAuto + 1].style.fill = "#FFD700";
+                        
+                    }
+    
+                        let promise = new Promise((resolve, reject) => {
+                            setTimeout(() => resolve("Esperar"), 2000);
+                            imgTranvia.style.animationPlayState = "running";
+                            console.log("arranco la animacion");
+                            //Modificar las variables del servidor
+                            fetch("datos.html", { body: "%22app%22.estado_parada_actual=" + (posiconAuto -1) + "", headers: { "Content-Type": "application/-x-www-urlencoded", }, method: "post" });
+                            fetch("datos.html", { body: "%22app%22.estado_movimiento=1", headers: { "Content-Type": "application/-x-www-urlencoded", }, method: "post" });
+                            
+                        });
+    
+                        let result = await promise;
+                        console.log("animacion finalizada");
+                        if (posiconAuto -1 == 0) {
+                            fetch("datos.html", { body: "%22app%22.estado_direccion=1", headers: { "Content-Type": "application/-x-www-urlencoded", }, method: "post" });
+                        	document.querySelector(':root').style.setProperty("--posorigen", array_pos_paradas[posiconAuto-1]);
+
+						}
+						reiniciarAnimacion();
+                        todosEnVacio();
+                        
+                        await recibirDatos();    
+        }
+    }
+    await recibirDatos();   
+}
 }
