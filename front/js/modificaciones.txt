@@ -1,0 +1,5 @@
+<!-- AWP_In_Variable Name = '"orden_marcha/paro"'-->
+<!-- AWP_In_Variable Name = '"orden_direccion"'--> 
+<!-- AWP_In_Variable Name = '"orden_velocidad"'--> 
+<!-- AWP_In_Variable Name = '"orden_parada_destino"'--> 
+<-- AWP_Enum_Def Name="listado" Values='0:"0",1:"0",2:"1"' -->
