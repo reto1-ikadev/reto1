@@ -1,8 +1,10 @@
 "use strict"
-var arrayModos = new Array();
-var array_pos_paradas = ["5%","19.8%","35.6%","50.4%","66.2%","82%"];
-var modo;
-var cuadro
+var arrayModos = new Array();// Este string nos permite indicar al interprete de JavaScript que 
+// queremos usar las variables ya declaradas (buena practica)
+var array_pos_paradas = ["5%","19.8%","35.6%","50.4%","66.2%","82%"];// Este array indica el porcentaje en 
+// donde se debe detener el tranvia en la animacion de la parada.
+var modo; // modo seleccionado
+var cuadro; // Esta variable almacena el tag entero de controles disponibles en el modo manual.
 arrayModos = document.getElementById("modo");
 arrayModos.addEventListener("change", ocultar);
 var pos_origen ;
