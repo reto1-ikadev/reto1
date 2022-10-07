@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
         <head>
         <title>Euskotren</title>
         <meta charset="UTF-8" />
@@ -7,7 +7,7 @@
         <meta name="description" content="sitio web interno de Euskotren" />
         <meta name="author" content="ikasdev" />
         <meta http-equiv="refresh" content="330" />
-        <link rel="stylesheet" type="text/css" href="index.css" title="style" />
+        <link rel="stylesheet" type="text/css" href="index2.css" title="style" />
         <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1">
       
         </head>
@@ -16,8 +16,8 @@
                 <p>Modo:</p>
                 <select id="modo" name="menu" size="1">
                     <option>Seleccione</option>
-                    <option value ="manual">Manual</option>
-                    <option value="automatico">Autom&aacute;tico</option>
+                    <option value ="1">Manual</option>
+                    <option value="2">Autom&aacute;tico</option>
                </select>
             </nav>
             <div id="titulo">
@@ -25,34 +25,42 @@
                 <h6>Intranet de euskotren</h6>
             </div>
         </header>
+        
+        <section id="animacion" style = "height: 34%;">
+            <div id ="botones">
+                
+                <div id="marchaMaquina">
+                    <input type="button" id="arrancar" value ="On">
+                 </div>
+                 <div id="paro">
+                    <input type="button" id="stop" value="Off">
+                </div>
+            </div>  
 
-        <section id="animacion">
-            <div id="anim_tranvia1">
-                <img id="tren1" src="imagenes/tranvia3.png">
+           <div id="svg_anim">
+                <div id="anim_tranvia1">
+                    <img id="tren1" alt="imagen de un tranvia" src="imagenes/tranvia.png">
+                </div>
+                <div id="svg_tranvia1" style="margin-right: 9%;">
+                    <svg width="100%" viewBox = "0 0 120 15">
+                        <line x1="10" y1="10" x2="92%" y2="10" stroke-width=".7" style= "stroke: black"/>
+                        <circle cx="10" cy="10" r="2" stroke-width="4" fill="grey"/>
+                        <circle cx="30" cy="10" r="2" stroke-width="4" fill="grey"/>
+                        <circle cx="50" cy="10" r="2" stroke-width="4" fill="grey"/>
+                        <circle cx="70" cy="10" r="2" stroke-width="4" fill="grey"/>
+                        <circle cx="90" cy="10" r="2" stroke-width="4" fill="grey"/>
+                        <circle cx="110.5" cy="10" r="2" stroke-width="4" fill="grey"/>
+                    </svg>>
+                </div>
             </div>
-           <!-- /* <div id="anim_tranvia2">
-                <img id="tren2" src="imagenes/tranvia3.png"> 
-            </div>
-            <div id="anim_tranvia3">
-                <img id="tren3" src="imagenes/tranvia3.png">
-            </div> -->
-                <svg width="100%" viewBox = "0 0 120 120">
-                <line x1="10" y1="10" x2="92%" y2="10" stroke-width=".7" style= "stroke: black"/>
-                <circle class="boton" cx="10" cy="10" r="2" stroke-width="4" fill="#20B2AA"/>
-                <circle class="boton" cx="30" cy="10" r="2" stroke-width="4" fill="#20B2AA"/>
-                <circle class="boton" cx="50" cy="10" r="2" stroke-width="4" fill="#20B2AA"/>
-                <circle class="boton" cx="70" cy="10" r="2" stroke-width="4" fill="#20B2AA"/>
-                <circle class="boton" cx="90" cy="10" r="2" stroke-width="4" fill="#20B2AA"/>
-                <circle class="boton" cx="110.5" cy="10" r="2" stroke-width="4" fill="#20B2AA"/>
-            </svg>
             
         </section>
+        
         <section id="control">
             <p>Parada destino</p> 
             <div id="select">
-
                 <select name = "parada destino" id="destino" size = "1">
-                    <option value="0">Seleccione</option>
+                    <option>Seleccione</option>
                     <option value = "1">Abetxuco</option>
                     <option value = "2">Kristo</option>
                     <option value = "3">Kaabenta</option>
@@ -63,16 +71,9 @@
 
                 <div id="marcha">
                     <input type="button" id="rearme" value ="Mover">
-                 </div>
+                </div>
             </div>
-                <div id ="botones">
-                    <div id="paro">
-                        <input type="button" id="stop" value="Off">
-                    </div>
-                    <div id="marchaMaquina">
-                        <input type="button" id="arrancar" value ="On">
-                     </div>
-                </div>  
+                
         </section>
         <footer>
             <dl>
@@ -99,6 +100,7 @@
             </div>
             
         </footer>
+        <script src = "js/main.js"></script>
     </body>
-   <script src = "js/main.js"></script>
+   
 </html>

@@ -1,15 +1,15 @@
 "use restrict"
 var arrayModos = new Array();
-var array_pos_paradas = ["5%","21.8%","38.6%","55.4%","72.2%","89%"];
+var array_pos_paradas = ["7%","21.6%","36.2%","50.8%","65.4%","80%"];
 var modo;
-var cuadro
+var cuadro;
 arrayModos = document.getElementById("modo");
 arrayModos.addEventListener("change", ocultar);
 var pos_origen ;
 var pos_destino ;
 const imgTranvia = document.getElementById("anim_tranvia1");
 var botones = document.querySelectorAll(".boton");
-var varAuto = 1;
+var varAuto;
 /*Esto es lo primero que se ejecuta al arrancar. Pide la posicion del tranvia al plc*/
 //Esperar a estar con el plc antes de descomentar la linea de abajo
 
@@ -24,13 +24,22 @@ bGo.addEventListener("click",arrancar);
 /*Boton parar para parar la animación*/
 var bStop;
 bStop = document.getElementById("stop");
-bStop.addEventListener("click", parar);
+bStop.addEventListener("click", parar)
 
 /*Boton para encender la maquinaria*/
+var bEnviar 
+<<<<<<< HEAD
+/*Boton para encender la maquinaria*/
+=======
+>>>>>>> retoques
 var bOn 
 bEnviar = document.getElementById("arrancar");
 bEnviar.addEventListener("click", encender);
+
 /*ComboBox paradas. Actualizar variables de las paradas*/
+
+
+
 
 var selector_destino = document.getElementById("destino");
 
@@ -51,27 +60,32 @@ function ocultar(event){
     modo = " ";
     modo = event.target.value;
     console.log("modo " + modo);
-    if(modo == "automatico"){
-        cuadro = document.getElementById("control");
+    var cuadro = document.getElementById("control");
+    if(modo == "2"){
+        
         console.log(cuadro + " cuadro");
-        cuadro.style.display = "none";
+        control.style.visibility= control.value = "hidden";
         // No se para que es necesario esta linea de esta forma: 
         // cuadro.style.display = cuadro.value = "none";
         // Pero no hay ninguna diferencia entre las dos.
         console.log("desaparezco");
-        varAuto = 0;
+        varAuto = 1;
         automatico();
     }
-    else if(modo == "manual"){
-        varAuto = 1;
+    else if(modo == "1"){
+        varAuto = 0;
         console.log("aparezco");
-        //cuadro.style.display= cuadro.value = "block";
-        //cuadro.style.display = "block";
+        
+        control.style.visibility= control.value = "visible";
     }
 }
 /*************************************CONTROLAR LA ANIMACION TRANVIA ******************************************************* */
 async function parar(){
+<<<<<<< HEAD
     await fetch("datos.html", { body: "%22app%22.estado_marcha_paro=0", headers: {"Content-Type": "application/x-www-form-urlencoded", }, method: "post" });
+=======
+    await fetch("datos.html", { body: "%22app%22.estado_marcha_paro=false", headers: {"Content-Type": "application/x-www-form-urlencoded", }, method: "post" });
+>>>>>>> retoques
     console.log(estadoMarchaParo());
     console.log("paro el tranvia");
     imgTranvia.style.animationPlayState = "paused" ;
@@ -116,6 +130,10 @@ else{
     console.log("mal");
 }
  }
+ async function encender(){
+    await fetch("datos.html", { body: "%22app%22.estado_marcha_paro=true", headers: {"Content-Type": "application/x-www-form-urlencoded", }, method: "post" });
+    console.log(estadoMarchaParo());
+}
 /**CONTROLA LOS COLORES DE LAS PARADAS ************************************************************************************ */
  function todosEnVacio() {
     for(let boton of botones) {
@@ -158,7 +176,7 @@ function reiniciarAnimacion(){
     /*Esta funcion la he tenido que crear para que el tranvia se vuelva a mover cada vez que pulso go. 
     Sin esto, la animación se para en una parada y no vuelve a arrancar. Solo ejecuta un ciclo*/
     fetch("datos.html", { body: "%22app%22.estado_movimiento=0", headers: { "Content-Type": "application/-x-www-urlencoded",}, method: "post"});
-    imgTranvia.style.animation = "none";
+    imgTranvia.style.animation = "pause";
     imgTranvia.offsetHeight; /*Con esto consigo actualizar la animación*/
     imgTranvia.style.animation = null;
 }
@@ -166,7 +184,6 @@ function reiniciarAnimacion(){
 
 
 /******************************FUNCIONES DE COMUNICACION CON EL PLC ******************************************************************** */
-Function 
 
 
 
@@ -176,15 +193,19 @@ async function recibirDatosIniciales(){
     datosRecibidos = await fetch("datos.html").then((response) => response.json()).then((datos)=> {return datos } );
     pos_origen = estadoParadaActual();
     actualizarPosOrigen();
-    estadoStopGo = estadoMarchaParo();
-    direccion = estadoDireccion();
-    velocidad = estadoVelocidad();
+    
 
 } 
 
 /*Con esta funcion pedimos datos al plc sin actualizar la posicion de origen*/
 async function recibirDatos(){
     datosRecibidos = await fetch("datos.html").then((response) => response.json()).then((datos)=> {return datos } );
+    paradaActual = estadoParadaActual();
+    estadoStopGo = estadoMarchaParo();
+    direccion = estadoDireccion();
+    velocidad = estadoVelocidad();
+
+
 } 
 
 /*Devuelve si el tranvia en el plc esta arrancado o no*/
@@ -209,6 +230,7 @@ function estadoVelocidad(){
 }
 
 /*Esta funcion coge del result del fetch la parada y actualiza la parada actual*/
+var paradaActual;
 function estadoParadaActual(){
     let estadoParAct = datosRecibidos['parada'];
     return estadoParAct;
@@ -225,17 +247,20 @@ function estadoMovimiento(){
 /*Hay que probar si se puede llamar directamente a la funcion arrancarAutomatico sin que este dentro de otra funcion */
 /*El tranvia comienza a moverse en modo automatico */
 function automatico() {
-    arrancarAutomatico();
+    recibirDatos();
+    if(varAuto == 1 && estadoStopGo == "1"){
+
+         arrancarAutomatico();
+    }
+   
 }
 /*Funcion que arranca automatico*/
 async function arrancarAutomatico() {
-    while (true) {
-        
-    for(let posicionAutomatico = 0; posicionAutomatico <=4;  posicionAutomatico++) {
-        if(varAuto === 1) {
-            todosEnVacio();
-            break;
-        }
+    while (estadoStopGo== "1") {
+		recibirDatos();
+    if(direccion ==1){
+    for(let posicionAutomatico = paradaActual; posicionAutomatico <=4 && estadoStopGo == "0";  posicionAutomatico++) {
+		recibirDatos();
         imgTranvia.addEventListener("animationend", listener,false);
     
         document.querySelector(':root').style.setProperty("--posorigen",array_pos_paradas[posicionAutomatico]);
@@ -248,6 +273,8 @@ async function arrancarAutomatico() {
             imgTranvia.style.animationPlayState = "running" ; 
             console.log("arranco la animacion");
             //Modificar las variables del servidor
+            fetch("datos.html", { body: "%22app%22.estado_parada_actual=" + posicionAutomatico+ "", headers: { "Content-Type": "application/-x-www-urlencoded",}, method: "post"});
+	        fetch("datos.html", { body: "%22app%22.estado_movimiento=1", headers: { "Content-Type": "application/-x-www-urlencoded",}, method: "post"});
         });
     
         let result = await promise;
@@ -258,11 +285,10 @@ async function arrancarAutomatico() {
         todosEnVacio();
         
     }
-    for(let posicionAutomatico = 5; posicionAutomatico >= 1; posicionAutomatico--) {
-        if(varAuto === 1) {
-            todosEnVacio();
-            break;
-        }
+    }
+    else{
+    for(let posicionAutomatico = paradaActual; posicionAutomatico >= 1 && estadoStopGo =="0"; posicionAutomatico--) {
+		recibirDatos();
         imgTranvia.addEventListener("animationend", listener,false);
         document.querySelector(':root').style.setProperty("--posorigen",array_pos_paradas[posicionAutomatico]);
         document.querySelector(':root').style.setProperty("--posdestino",array_pos_paradas[posicionAutomatico - 1]);
@@ -275,7 +301,8 @@ async function arrancarAutomatico() {
             setTimeout(() => resolve("Esperar"), 2000);
             imgTranvia.style.animationPlayState = "running" ; 
             console.log("arranco la animacion");
-            //Modificar las variables del servidor
+            fetch("datos.html", { body: "%22app%22.estado_parada_actual=" + posicionAutomatico+ "", headers: { "Content-Type": "application/-x-www-urlencoded",}, method: "post"});
+	        fetch("datos.html", { body: "%22app%22.estado_movimiento=0", headers: { "Content-Type": "application/-x-www-urlencoded",}, method: "post"});
         });
         let result = await promise;
 
@@ -283,11 +310,14 @@ async function arrancarAutomatico() {
         console.log("animacion finalizada");
             
         todosEnVacio();
-    
+        
         }
-        if(varAuto === 1) {
+        if(varAuto == 0) {
             todosEnVacio();
-            break;
+            
         }
+
     }
+} 
+    
 }
